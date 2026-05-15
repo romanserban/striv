@@ -31,9 +31,9 @@
 
 # Phase 3 — Profiles
 
-- [ ] Coach profile creation
-- [ ] Client profile creation
-- [ ] Coach invite code
+- [x] Coach profile creation
+- [x] Client profile creation
+- [x] Coach invite code
 - [ ] Client joins coach with invite code
 - [ ] Coach sees client list
 - [ ] Client sees assigned coach

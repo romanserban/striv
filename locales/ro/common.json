@@ -22,6 +22,14 @@
   "fullName": "Nume complet",
   "continue": "Continua",
   "save": "Salveaza",
+  "bio": "Bio",
+  "specialty": "Specializare",
+  "inviteCode": "Cod de invitatie",
+  "goal": "Obiectiv",
+  "trainingLevel": "Nivel de antrenament",
+  "heightCm": "Inaltime (cm)",
+  "startingWeightKg": "Greutate initiala (kg)",
+  "profileSaved": "Profil salvat.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -37,7 +45,10 @@
   "validation": {
     "email": "Introdu o adresa de email valida.",
     "passwordMin": "Parola trebuie sa aiba cel putin 6 caractere.",
-    "nameMin": "Introdu numele complet."
+    "nameMin": "Introdu numele complet.",
+    "goalMin": "Introdu un obiectiv.",
+    "trainingLevelMin": "Introdu nivelul de antrenament.",
+    "number": "Introdu un numar valid."
   },
   "errors": {
     "generic": "Ceva nu a mers bine. Incearca din nou."

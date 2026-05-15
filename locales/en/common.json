@@ -22,6 +22,14 @@
   "fullName": "Full name",
   "continue": "Continue",
   "save": "Save",
+  "bio": "Bio",
+  "specialty": "Specialty",
+  "inviteCode": "Invite code",
+  "goal": "Goal",
+  "trainingLevel": "Training level",
+  "heightCm": "Height (cm)",
+  "startingWeightKg": "Starting weight (kg)",
+  "profileSaved": "Profile saved.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -37,7 +45,10 @@
   "validation": {
     "email": "Enter a valid email address.",
     "passwordMin": "Password must be at least 6 characters.",
-    "nameMin": "Enter your full name."
+    "nameMin": "Enter your full name.",
+    "goalMin": "Enter a goal.",
+    "trainingLevelMin": "Enter a training level.",
+    "number": "Enter a valid number."
   },
   "errors": {
     "generic": "Something went wrong. Try again."

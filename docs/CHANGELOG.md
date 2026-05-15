@@ -17,6 +17,9 @@
 - Logout actions on coach settings and client profile screens.
 - Auth validation schema tests.
 - Initial Supabase migration for auth/profile tables, role-specific profile tables, invite codes, updated-at triggers, Auth user profile creation, and RLS policies.
+- Coach profile editing for full name, bio, specialty, and invite code display.
+- Client profile editing for full name, goal, training level, height, and starting weight.
+- Profile service functions and profile validation schema tests.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.

@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, and has the initial auth/profile database migration.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has the initial auth/profile database migration, and includes coach/client profile editing screens.
 
 ---
 
@@ -27,8 +27,8 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Project setup
 - [x] Authentication
 - [x] Role-based onboarding
-- [ ] Coach profile
-- [ ] Client profile
+- [x] Coach profile
+- [x] Client profile
 - [ ] Invite code system
 - [ ] Exercise library
 - [ ] Workout builder
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Initial Supabase auth/profile migration completed on 2026-05-15.
+Coach and client profile editing completed on 2026-05-15.
 
 ---
 
@@ -80,6 +80,9 @@ Initial Supabase auth/profile migration completed on 2026-05-15.
 - Signup attempts to create/update a `profiles` row after Supabase Auth signup.
 - `supabase/migrations/202605150001_create_profiles.sql` creates `profiles`, `coach_profiles`, `client_profiles`, updated-at triggers, an Auth user profile trigger, invite code generation, and initial RLS policies.
 - The Auth user trigger creates the base profile and role-specific profile from signup metadata, so email-confirmation projects do not need an immediate client-side session to create profiles.
+- Coach settings can update full name, bio, and specialty and displays the generated invite code.
+- Client profile can update full name, goal, training level, height, and starting weight.
+- Profile screens use `services/profiles.ts`; Supabase calls stay out of UI components.
 
 ---
 
@@ -94,7 +97,7 @@ Initial Supabase auth/profile migration completed on 2026-05-15.
 
 # Next Recommended Task
 
-Apply the Supabase migration, then manually test signup, email confirmation behavior, login, role redirects, and logout against the real project.
+Build the invite-code connection flow so clients can join a coach and coaches can see connected clients.
 
 ---
 
@@ -132,6 +135,9 @@ Apply the Supabase migration, then manually test signup, email confirmation beha
 - hooks/useAuthBootstrap.ts
 - types/profile.ts
 - supabase/migrations/202605150001_create_profiles.sql
+- services/profiles.ts
+- features/settings/profileSchemas.ts
+- types/roleProfiles.ts
 
 ---
 
