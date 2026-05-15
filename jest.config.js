@@ -1,5 +1,5 @@
 module.exports = {
-  preset: "@react-native/jest-preset",
+  preset: "jest-expo",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1"
   },

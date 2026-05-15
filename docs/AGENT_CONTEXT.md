@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded.
+Expo React Native TypeScript foundation has been scaffolded and aligned to Expo SDK 54 for Expo Go compatibility.
 
 ---
 
@@ -74,13 +74,14 @@ App foundation completed on 2026-05-15.
 - Environment variables are prepared in `.env.example`; real values must stay out of Git.
 - Supabase client lives in `lib/supabase.ts`; UI components should call services/hooks, not Supabase directly.
 - Current scaffold uses Expo Router route groups for auth, coach, and client tabs.
+- The project uses Expo SDK 54 because the App Store Expo Go app may not run SDK 55 projects during the SDK 55 transition period.
 
 ---
 
 # Known Issues
 
 - npm audit reports 9 dependency vulnerabilities from the initial install; no `npm audit fix --force` was run because it may introduce breaking changes.
-- The app has not been manually opened in a simulator yet.
+- `npx expo start --clear --localhost` was started briefly and did not crash, but it did not print a QR code before being stopped; close any already-running Expo CLI terminals before starting again.
 
 ---
 
@@ -117,6 +118,7 @@ Build authentication service/forms and role-based redirects using Supabase Auth.
 - types/
 - utils/
 - __tests__/
+- expo-env.d.ts
 
 ---
 

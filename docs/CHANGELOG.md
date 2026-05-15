@@ -15,6 +15,11 @@
 - Supabase environment variables are documented in `.env.example` only.
 - npm audit currently reports dependency vulnerabilities from installed packages.
 
+### Fixed
+- Downgraded the project from Expo SDK 55 to SDK 54 so it can run with the App Store Expo Go app.
+- Aligned Expo, React Native, React, React Navigation, Jest, Reanimated, Worklets, SVG, and Expo peer package versions for SDK 54.
+- Updated tab icon props for the installed Lucide React Native typings.
+
 ## Initial Setup
 
 ### Added

@@ -44,7 +44,7 @@ export default function ClientLayout() {
 
 function createTabIcon(Icon: LucideIcon) {
   function TabIcon({ color, size }: { color: string; size: number }) {
-    return <Icon color={color} size={size} />;
+    return <Icon size={size} stroke={color} />;
   }
 
   TabIcon.displayName = `${Icon.displayName ?? Icon.name}TabIcon`;
