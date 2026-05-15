@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
+import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -63,11 +64,20 @@ export default function SignupScreen() {
     signupMutation.mutate(values);
   };
 
+  useEffect(() => {
+    if (!role) {
+      router.replace("/choose-role");
+    }
+  }, [role]);
+
+  if (!role) {
+    return null;
+  }
+
   return (
     <Screen>
       <Text style={styles.title}>{t("auth.signupTitle")}</Text>
       <View style={styles.form}>
-        {!role ? <Text style={styles.helper}>{t("auth.selectRoleFirst")}</Text> : null}
         <Controller
           control={control}
           name="fullName"
@@ -112,9 +122,9 @@ export default function SignupScreen() {
         />
         {signupMutation.error ? <Text style={styles.error}>{signupMutation.error.message}</Text> : null}
         <Button
-          label={role ? t("signup") : t("chooseRole")}
+          label={t("signup")}
           loading={signupMutation.isPending}
-          onPress={role ? handleSubmit(onSubmit) : () => router.push("/choose-role")}
+          onPress={handleSubmit(onSubmit)}
         />
       </View>
     </Screen>
@@ -131,11 +141,6 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: spacing.lg
-  },
-  helper: {
-    color: colors.textSecondary,
-    fontSize: typography.size.md,
-    lineHeight: typography.lineHeight.md
   },
   error: {
     color: colors.error,

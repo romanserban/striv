@@ -22,7 +22,7 @@ export default function WelcomeScreen() {
           <Link href="/login" asChild>
             <Button label={t("login")} />
           </Link>
-          <Link href="/signup" asChild>
+          <Link href="/choose-role" asChild>
             <Button label={t("signup")} variant="secondary" />
           </Link>
         </View>

@@ -34,6 +34,7 @@
 - Downgraded the project from Expo SDK 55 to SDK 54 so it can run with the App Store Expo Go app.
 - Aligned Expo, React Native, React, React Navigation, Jest, Reanimated, Worklets, SVG, and Expo peer package versions for SDK 54.
 - Updated tab icon props for the installed Lucide React Native typings.
+- Fixed signup onboarding so role selection is shown before the signup form.
 
 ## Initial Setup
 
