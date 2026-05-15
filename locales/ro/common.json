@@ -63,6 +63,13 @@
   "workoutUpdated": "Antrenament actualizat.",
   "workoutDeleted": "Antrenament sters.",
   "workoutDuplicated": "Antrenament duplicat.",
+  "assignWorkout": "Asigneaza antrenament",
+  "selectClient": "Selecteaza client",
+  "selectedClient": "Client selectat",
+  "scheduledDate": "Data programata",
+  "workoutAssigned": "Antrenament asignat.",
+  "assignedWorkouts": "Antrenamente asignate",
+  "noAssignedWorkouts": "Nu exista antrenamente asignate inca.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -88,6 +95,7 @@
     "workoutNameMin": "Introdu numele antrenamentului.",
     "repsMin": "Introdu repetarile.",
     "integer": "Introdu un numar intreg.",
+    "date": "Foloseste YYYY-MM-DD.",
     "url": "Introdu un URL valid."
   },
   "errors": {

@@ -63,6 +63,13 @@
   "workoutUpdated": "Workout updated.",
   "workoutDeleted": "Workout deleted.",
   "workoutDuplicated": "Workout duplicated.",
+  "assignWorkout": "Assign workout",
+  "selectClient": "Select client",
+  "selectedClient": "Selected client",
+  "scheduledDate": "Scheduled date",
+  "workoutAssigned": "Workout assigned.",
+  "assignedWorkouts": "Assigned workouts",
+  "noAssignedWorkouts": "No assigned workouts yet.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -88,6 +95,7 @@
     "workoutNameMin": "Enter a workout name.",
     "repsMin": "Enter reps.",
     "integer": "Enter a whole number.",
+    "date": "Use YYYY-MM-DD.",
     "url": "Enter a valid URL."
   },
   "errors": {

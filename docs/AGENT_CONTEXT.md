@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout-template database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, and supports creating/editing/duplicating/deleting workout templates with exercises.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, and supports assigning workouts to clients.
 
 ---
 
@@ -32,7 +32,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Invite code system
 - [x] Exercise library
 - [x] Workout builder
-- [ ] Workout assignment
+- [x] Workout assignment
 - [ ] Workout logging
 - [ ] Progress tracking
 - [ ] Progress photos
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Workout template edit/duplicate/delete actions completed on 2026-05-15.
+Workout assignment foundation completed on 2026-05-15.
 
 ---
 
@@ -91,6 +91,9 @@ Workout template edit/duplicate/delete actions completed on 2026-05-15.
 - `supabase/migrations/202605150004_create_workout_templates.sql` creates workout template tables and RLS.
 - Coach Workouts tab supports creating/listing workout templates, selecting a template, and adding exercises with sets/reps/rest targets.
 - Coach Workouts tab supports editing, duplicating, and deleting workout templates.
+- `supabase/migrations/202605150005_create_assigned_workouts.sql` creates assigned workouts and RLS for coaches/clients.
+- Coach Clients tab supports selecting a connected client, selecting a workout template, and assigning it for a scheduled date.
+- Client Today tab lists assigned workouts.
 
 ---
 
@@ -105,7 +108,7 @@ Workout template edit/duplicate/delete actions completed on 2026-05-15.
 
 # Next Recommended Task
 
-Start workout assignment: assigned workout tables/service and a coach assignment flow.
+Start workout logging foundation: workout log tables/service and client completion flow.
 
 ---
 
@@ -155,6 +158,10 @@ Start workout assignment: assigned workout tables/service and a coach assignment
 - services/workouts.ts
 - features/workouts/workoutSchemas.ts
 - types/workout.ts
+- supabase/migrations/202605150005_create_assigned_workouts.sql
+- services/assignments.ts
+- features/workouts/assignmentSchemas.ts
+- types/assignedWorkout.ts
 
 ---
 

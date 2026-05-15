@@ -74,8 +74,8 @@
 - [x] Edit workout
 - [x] Duplicate workout
 - [x] Delete workout
-- [ ] Assign workout to client
-- [ ] Scheduled workout appears for client
+- [x] Assign workout to client
+- [x] Scheduled workout appears for client
 
 ---
 
