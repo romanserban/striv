@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     lineHeight: typography.lineHeight.md
   },
   actions: {
-    gap: spacing.md
+    gap: spacing.sm
   }
 });
