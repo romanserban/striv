@@ -36,7 +36,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Workout logging
 - [x] Progress tracking
 - [x] Progress photos
-- [ ] Chat
+- [x] Chat
 - [ ] Calendar
 - [ ] Notifications
 - [ ] Settings
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Progress photo upload foundation completed on 2026-05-15.
+Chat foundation completed on 2026-05-15.
 
 ---
 
@@ -104,6 +104,9 @@ Progress photo upload foundation completed on 2026-05-15.
 - Client Progress tab supports logging weight, measurements, energy level, notes, and viewing history.
 - `supabase/migrations/202605150009_create_progress_photos.sql` creates private progress photo storage, photo metadata, and storage/table RLS.
 - Client Progress tab supports selecting and uploading a progress photo and viewing signed photo thumbnails.
+- `supabase/migrations/202605150010_create_chat.sql` creates coach-client conversations, messages, RLS policies, realtime publication setup, and a guarded get-or-create conversation RPC.
+- Coach Chat tab supports viewing conversations, starting a conversation from assigned clients, opening a chat thread, sending messages, and receiving realtime message updates.
+- Client Chat tab supports opening the assigned coach conversation, sending messages, and receiving realtime message updates.
 
 ---
 
@@ -113,12 +116,13 @@ Progress photo upload foundation completed on 2026-05-15.
 - `npx expo start --clear --localhost` was started briefly and did not crash, but it did not print a QR code before being stopped; close any already-running Expo CLI terminals before starting again.
 - Auth/profile/invite flows require applying all migrations in `supabase/migrations` to the Supabase project.
 - The full auth flow has not been manually tested against a real Supabase project in this session.
+- Chat requires applying `supabase/migrations/202605150010_create_chat.sql`; realtime behavior still needs manual testing against a real Supabase project.
 
 ---
 
 # Next Recommended Task
 
-Start chat foundation: conversation/message tables, service, and basic coach/client chat screens.
+Start calendar foundation: scheduled session tables, service, and basic coach/client calendar screens.
 
 ---
 
@@ -182,6 +186,15 @@ Start chat foundation: conversation/message tables, service, and basic coach/cli
 - features/progress/progressSchemas.ts
 - types/progress.ts
 - supabase/migrations/202605150009_create_progress_photos.sql
+- supabase/migrations/202605150010_create_chat.sql
+- services/messages.ts
+- types/chat.ts
+- features/chat/chatSchemas.ts
+- features/chat/ChatThread.tsx
+- components/ui/MessageBubble.tsx
+- app/(coach)/chat.tsx
+- app/(client)/chat.tsx
+- __tests__/chatSchemas.test.ts
 
 ---
 

@@ -149,9 +149,12 @@ Do not write unit tests for:
 - coach can view progress
 
 ## Chat
+- coach can start a conversation with an assigned client
+- client can open the assigned coach conversation
 - coach can send message
 - client can send message
 - messages appear in order
+- realtime message updates appear without leaving the thread
 - conversation persists after refresh
 
 ## Calendar

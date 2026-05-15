@@ -34,6 +34,8 @@
 - Added workout log migration/service and client start/complete workout actions with coach-visible assignment status.
 - Added client workout detail screen with set-level actual reps and weight logging.
 - Local demo user seed script for one coach and one connected client.
+- Added chat migration with conversation/message tables, RLS, realtime publication setup, and guarded get-or-create conversation RPC.
+- Added message service, chat validation schema/test, reusable message bubble, shared chat thread UI, and coach/client chat screens.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.

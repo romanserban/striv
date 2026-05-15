@@ -49,7 +49,7 @@
 - [x] Add exercises table
 - [x] Add workout tables
 - [x] Add progress tables
-- [ ] Add chat tables
+- [x] Add chat tables
 - [ ] Add scheduled_sessions table
 - [x] Add RLS policies
 - [x] Add private storage bucket
@@ -107,12 +107,12 @@
 
 # Phase 9 — Chat
 
-- [ ] Create conversation
-- [ ] Chat list
-- [ ] Chat detail
-- [ ] Send message
-- [ ] Receive message
-- [ ] Realtime updates if possible
+- [x] Create conversation
+- [x] Chat list
+- [x] Chat detail
+- [x] Send message
+- [x] Receive message
+- [x] Realtime updates if possible
 
 ---
 
