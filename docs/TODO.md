@@ -42,16 +42,16 @@
 
 # Phase 4 — Database
 
-- [ ] Create Supabase migrations
-- [ ] Add profiles table
-- [ ] Add coach_profiles table
-- [ ] Add client_profiles table
+- [x] Create Supabase migrations
+- [x] Add profiles table
+- [x] Add coach_profiles table
+- [x] Add client_profiles table
 - [ ] Add exercises table
 - [ ] Add workout tables
 - [ ] Add progress tables
 - [ ] Add chat tables
 - [ ] Add scheduled_sessions table
-- [ ] Add RLS policies
+- [x] Add RLS policies
 - [ ] Add private storage bucket
 - [ ] Seed global exercises
 

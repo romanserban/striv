@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, and includes the first Supabase Auth flow implementation.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, and has the initial auth/profile database migration.
 
 ---
 
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Auth foundation completed on 2026-05-15.
+Initial Supabase auth/profile migration completed on 2026-05-15.
 
 ---
 
@@ -78,6 +78,8 @@ Auth foundation completed on 2026-05-15.
 - Auth UI uses React Hook Form and Zod schemas.
 - Auth screens call service functions in `services/auth.ts`; Supabase is not called directly from UI components.
 - Signup attempts to create/update a `profiles` row after Supabase Auth signup.
+- `supabase/migrations/202605150001_create_profiles.sql` creates `profiles`, `coach_profiles`, `client_profiles`, updated-at triggers, an Auth user profile trigger, invite code generation, and initial RLS policies.
+- The Auth user trigger creates the base profile and role-specific profile from signup metadata, so email-confirmation projects do not need an immediate client-side session to create profiles.
 
 ---
 
@@ -85,14 +87,14 @@ Auth foundation completed on 2026-05-15.
 
 - npm audit reports 9 dependency vulnerabilities from the initial install; no `npm audit fix --force` was run because it may introduce breaking changes.
 - `npx expo start --clear --localhost` was started briefly and did not crash, but it did not print a QR code before being stopped; close any already-running Expo CLI terminals before starting again.
-- Auth flows require the `profiles` table from `docs/DB_SCHEMA.md`; without database migrations, signup/profile role completion will fail after Supabase Auth succeeds.
+- Auth flows require applying `supabase/migrations/202605150001_create_profiles.sql` to the Supabase project.
 - The full auth flow has not been manually tested against a real Supabase project in this session.
 
 ---
 
 # Next Recommended Task
 
-Create Supabase migrations for `profiles`, role-specific profile tables, and RLS policies.
+Apply the Supabase migration, then manually test signup, email confirmation behavior, login, role redirects, and logout against the real project.
 
 ---
 
@@ -129,6 +131,7 @@ Create Supabase migrations for `profiles`, role-specific profile tables, and RLS
 - store/authStore.ts
 - hooks/useAuthBootstrap.ts
 - types/profile.ts
+- supabase/migrations/202605150001_create_profiles.sql
 
 ---
 

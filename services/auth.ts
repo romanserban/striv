@@ -59,7 +59,7 @@ export const authService = {
       throw error;
     }
 
-    if (data.user) {
+    if (data.user && data.session) {
       await authService.upsertProfile({
         userId: data.user.id,
         fullName,
