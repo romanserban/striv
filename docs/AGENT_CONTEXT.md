@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout-template database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, and supports creating/listing workout templates.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout-template database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, and supports creating workout templates with exercises.
 
 ---
 
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Workout template foundation completed on 2026-05-15.
+Adding exercises to workout templates completed on 2026-05-15.
 
 ---
 
@@ -89,7 +89,7 @@ Workout template foundation completed on 2026-05-15.
 - `supabase/migrations/202605150003_create_exercises.sql` creates the exercises table and RLS for global and coach custom exercises.
 - Coach Workouts tab currently hosts the basic exercise library list/create flow; workout builder is not implemented yet.
 - `supabase/migrations/202605150004_create_workout_templates.sql` creates workout template tables and RLS.
-- Coach Workouts tab supports creating/listing workout templates, but adding exercises to templates is still pending.
+- Coach Workouts tab supports creating/listing workout templates, selecting a template, and adding exercises with sets/reps/rest targets.
 
 ---
 
@@ -104,7 +104,7 @@ Workout template foundation completed on 2026-05-15.
 
 # Next Recommended Task
 
-Add exercises to workout templates, then implement edit/duplicate/delete template actions.
+Implement edit/duplicate/delete workout template actions.
 
 ---
 

@@ -47,6 +47,15 @@
   "createWorkout": "Creeaza antrenament",
   "workoutSaved": "Antrenament salvat.",
   "noWorkoutTemplates": "Nu exista sabloane de antrenament inca.",
+  "selectWorkout": "Selecteaza antrenament",
+  "selectedWorkout": "Antrenament selectat",
+  "addToWorkout": "Adauga in antrenament",
+  "sets": "Seturi",
+  "reps": "Repetari",
+  "targetWeight": "Greutate tinta",
+  "restSeconds": "Pauza in secunde",
+  "tempo": "Tempo",
+  "exerciseAdded": "Exercitiu adaugat.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -70,6 +79,8 @@
     "exerciseNameMin": "Introdu numele exercitiului.",
     "muscleGroupMin": "Introdu grupa musculara.",
     "workoutNameMin": "Introdu numele antrenamentului.",
+    "repsMin": "Introdu repetarile.",
+    "integer": "Introdu un numar intreg.",
     "url": "Introdu un URL valid."
   },
   "errors": {

@@ -47,6 +47,15 @@
   "createWorkout": "Create workout",
   "workoutSaved": "Workout saved.",
   "noWorkoutTemplates": "No workout templates yet.",
+  "selectWorkout": "Select workout",
+  "selectedWorkout": "Selected workout",
+  "addToWorkout": "Add to workout",
+  "sets": "Sets",
+  "reps": "Reps",
+  "targetWeight": "Target weight",
+  "restSeconds": "Rest seconds",
+  "tempo": "Tempo",
+  "exerciseAdded": "Exercise added.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -70,6 +79,8 @@
     "exerciseNameMin": "Enter an exercise name.",
     "muscleGroupMin": "Enter a muscle group.",
     "workoutNameMin": "Enter a workout name.",
+    "repsMin": "Enter reps.",
+    "integer": "Enter a whole number.",
     "url": "Enter a valid URL."
   },
   "errors": {

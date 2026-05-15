@@ -70,7 +70,7 @@
 # Phase 6 — Workouts
 
 - [x] Workout builder
-- [ ] Add exercises to workout
+- [x] Add exercises to workout
 - [ ] Edit workout
 - [ ] Duplicate workout
 - [ ] Delete workout
