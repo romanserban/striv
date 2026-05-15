@@ -1,0 +1,36 @@
+{
+  "welcome": "Bun venit",
+  "login": "Autentificare",
+  "signup": "Creeaza cont",
+  "forgotPassword": "Parola uitata",
+  "chooseRole": "Alege rolul",
+  "coach": "Antrenor",
+  "client": "Client",
+  "dashboard": "Panou",
+  "clients": "Clienti",
+  "workouts": "Antrenamente",
+  "calendar": "Calendar",
+  "chat": "Chat",
+  "profile": "Profil",
+  "progress": "Progres",
+  "today": "Azi",
+  "settings": "Setari",
+  "logout": "Deconectare",
+  "email": "Email",
+  "password": "Parola",
+  "name": "Nume",
+  "auth": {
+    "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
+    "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
+    "loginTitle": "Autentifica-te in Striv",
+    "signupTitle": "Creeaza contul Striv",
+    "forgotTitle": "Reseteaza parola",
+    "chooseRoleTitle": "Cum vei folosi Striv?"
+  },
+  "placeholder": {
+    "screenBody": "Acest ecran de baza este pregatit pentru urmatorul pas MVP.",
+    "emptyTitle": "Nu exista continut inca",
+    "emptyBody": "Fluxul principal va fi adaugat in faza urmatoare.",
+    "loading": "Se incarca"
+  }
+}

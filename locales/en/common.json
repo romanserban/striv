@@ -1,0 +1,36 @@
+{
+  "welcome": "Welcome",
+  "login": "Log in",
+  "signup": "Sign up",
+  "forgotPassword": "Forgot password",
+  "chooseRole": "Choose role",
+  "coach": "Coach",
+  "client": "Client",
+  "dashboard": "Dashboard",
+  "clients": "Clients",
+  "workouts": "Workouts",
+  "calendar": "Calendar",
+  "chat": "Chat",
+  "profile": "Profile",
+  "progress": "Progress",
+  "today": "Today",
+  "settings": "Settings",
+  "logout": "Log out",
+  "email": "Email",
+  "password": "Password",
+  "name": "Name",
+  "auth": {
+    "welcomeTitle": "Build stronger coaching habits.",
+    "welcomeBody": "A focused workspace for coaches and clients.",
+    "loginTitle": "Log in to Striv",
+    "signupTitle": "Create your Striv account",
+    "forgotTitle": "Reset your password",
+    "chooseRoleTitle": "How will you use Striv?"
+  },
+  "placeholder": {
+    "screenBody": "This foundation screen is ready for the next MVP step.",
+    "emptyTitle": "Nothing here yet",
+    "emptyBody": "The core workflow will be added in the next phase.",
+    "loading": "Loading"
+  }
+}
