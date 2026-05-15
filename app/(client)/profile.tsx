@@ -11,7 +11,12 @@ import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
-import { clientProfileSchema, type ClientProfileFormValues } from "@/features/settings/profileSchemas";
+import {
+  clientProfileSchema,
+  inviteCodeSchema,
+  type ClientProfileFormValues,
+  type InviteCodeFormValues
+} from "@/features/settings/profileSchemas";
 import { authService } from "@/services/auth";
 import { profilesService } from "@/services/profiles";
 import { useAuthStore } from "@/store/authStore";
@@ -42,9 +47,25 @@ export default function ClientProfileScreen() {
       startingWeightKg: ""
     }
   });
+  const {
+    control: inviteControl,
+    handleSubmit: handleInviteSubmit,
+    reset: resetInvite,
+    formState: { errors: inviteErrors }
+  } = useForm<InviteCodeFormValues>({
+    resolver: zodResolver(inviteCodeSchema),
+    defaultValues: {
+      inviteCode: ""
+    }
+  });
   const clientProfileQuery = useQuery({
     queryKey: ["clientProfile", userId],
     queryFn: () => profilesService.getClientProfile(userId ?? ""),
+    enabled: Boolean(userId)
+  });
+  const assignedCoachQuery = useQuery({
+    queryKey: ["assignedCoach", userId],
+    queryFn: profilesService.getAssignedCoach,
     enabled: Boolean(userId)
   });
   const saveMutation = useMutation({
@@ -64,6 +85,14 @@ export default function ClientProfileScreen() {
     },
     onSuccess: ({ profile: updatedProfile }) => {
       setProfile(updatedProfile);
+      queryClient.invalidateQueries({ queryKey: ["clientProfile", userId] });
+    }
+  });
+  const joinCoachMutation = useMutation({
+    mutationFn: (values: InviteCodeFormValues) => profilesService.joinCoachByInviteCode(values.inviteCode),
+    onSuccess: () => {
+      resetInvite();
+      queryClient.invalidateQueries({ queryKey: ["assignedCoach", userId] });
       queryClient.invalidateQueries({ queryKey: ["clientProfile", userId] });
     }
   });
@@ -87,6 +116,10 @@ export default function ClientProfileScreen() {
 
   const onSubmit = (values: ClientProfileFormValues) => {
     saveMutation.mutate(values);
+  };
+
+  const onInviteSubmit = (values: InviteCodeFormValues) => {
+    joinCoachMutation.mutate(values);
   };
 
   return (
@@ -166,6 +199,33 @@ export default function ClientProfileScreen() {
             {saveMutation.error ? <Text style={styles.error}>{saveMutation.error.message}</Text> : null}
             {saveMutation.isSuccess ? <Text style={styles.success}>{t("profileSaved")}</Text> : null}
             <Button label={t("save")} loading={saveMutation.isPending} onPress={handleSubmit(onSubmit)} />
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{t("assignedCoach")}</Text>
+              <Text style={styles.sectionBody}>
+                {assignedCoachQuery.data?.coach_full_name ?? t("noCoachAssigned")}
+              </Text>
+              <Controller
+                control={inviteControl}
+                name="inviteCode"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    label={t("inviteCode")}
+                    autoCapitalize="characters"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    error={inviteErrors.inviteCode?.message ? t(inviteErrors.inviteCode.message) : undefined}
+                  />
+                )}
+              />
+              {joinCoachMutation.error ? <Text style={styles.error}>{joinCoachMutation.error.message}</Text> : null}
+              <Button
+                label={t("joinCoach")}
+                loading={joinCoachMutation.isPending}
+                onPress={handleInviteSubmit(onInviteSubmit)}
+                variant="secondary"
+              />
+            </View>
             <Button
               label={t("logout")}
               loading={logoutMutation.isPending}
@@ -182,6 +242,21 @@ export default function ClientProfileScreen() {
 const styles = StyleSheet.create({
   form: {
     gap: spacing.lg
+  },
+  section: {
+    gap: spacing.md,
+    paddingTop: spacing.sm
+  },
+  sectionTitle: {
+    color: colors.textPrimary,
+    fontSize: typography.size.lg,
+    lineHeight: typography.lineHeight.lg,
+    fontWeight: typography.weight.bold
+  },
+  sectionBody: {
+    color: colors.textSecondary,
+    fontSize: typography.size.md,
+    lineHeight: typography.lineHeight.md
   },
   error: {
     color: colors.error,

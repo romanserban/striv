@@ -34,9 +34,9 @@
 - [x] Coach profile creation
 - [x] Client profile creation
 - [x] Coach invite code
-- [ ] Client joins coach with invite code
-- [ ] Coach sees client list
-- [ ] Client sees assigned coach
+- [x] Client joins coach with invite code
+- [x] Coach sees client list
+- [x] Client sees assigned coach
 
 ---
 

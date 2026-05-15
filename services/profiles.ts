@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import type { Profile } from "@/types/profile";
-import type { ClientProfile, CoachProfile } from "@/types/roleProfiles";
+import type { AssignedClient, AssignedCoach, ClientProfile, CoachProfile } from "@/types/roleProfiles";
 
 type UpdateBaseProfileInput = {
   userId: string;
@@ -122,5 +122,37 @@ export const profilesService = {
     }
 
     return { profile, clientProfile: data };
+  },
+
+  async joinCoachByInviteCode(inviteCode: string) {
+    const { data, error } = await supabase
+      .rpc("join_coach_by_invite_code", { invite_code_input: inviteCode })
+      .single<AssignedCoach>();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
+
+  async getAssignedCoach() {
+    const { data, error } = await supabase.rpc("get_assigned_coach").maybeSingle<AssignedCoach>();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
+
+  async getAssignedClients() {
+    const { data, error } = await supabase.rpc("get_assigned_clients");
+
+    if (error) {
+      throw error;
+    }
+
+    return (data ?? []) as AssignedClient[];
   }
 };

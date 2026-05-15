@@ -20,12 +20,15 @@
 - Coach profile editing for full name, bio, specialty, and invite code display.
 - Client profile editing for full name, goal, training level, height, and starting weight.
 - Profile service functions and profile validation schema tests.
+- Invite-code RPC migration for client coach connection, assigned coach lookup, and assigned client list.
+- Client invite-code join form and assigned coach display.
+- Coach connected-client list.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.
 - npm audit currently reports dependency vulnerabilities from installed packages.
 - Auth profile creation requires the `profiles` table and RLS policies to be applied in Supabase.
-- Apply `supabase/migrations/202605150001_create_profiles.sql` before manually testing real signup/login flows.
+- Apply all migrations in `supabase/migrations` before manually testing real signup/login/profile/invite flows.
 
 ### Fixed
 - Downgraded the project from Expo SDK 55 to SDK 54 so it can run with the App Store Expo Go app.

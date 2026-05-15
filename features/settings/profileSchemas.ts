@@ -19,5 +19,10 @@ export const clientProfileSchema = z.object({
   startingWeightKg: optionalDecimal
 });
 
+export const inviteCodeSchema = z.object({
+  inviteCode: z.string().trim().min(4, "validation.inviteCodeMin")
+});
+
 export type CoachProfileFormValues = z.infer<typeof coachProfileSchema>;
 export type ClientProfileFormValues = z.infer<typeof clientProfileSchema>;
+export type InviteCodeFormValues = z.infer<typeof inviteCodeSchema>;

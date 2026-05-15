@@ -1,4 +1,4 @@
-import { clientProfileSchema, coachProfileSchema } from "@/features/settings/profileSchemas";
+import { clientProfileSchema, coachProfileSchema, inviteCodeSchema } from "@/features/settings/profileSchemas";
 
 describe("profile schemas", () => {
   it("accepts valid coach profile input", () => {
@@ -21,5 +21,9 @@ describe("profile schemas", () => {
     });
 
     expect(result.success).toBe(false);
+  });
+
+  it("accepts an invite code", () => {
+    expect(inviteCodeSchema.safeParse({ inviteCode: "ABCD1234" }).success).toBe(true);
   });
 });

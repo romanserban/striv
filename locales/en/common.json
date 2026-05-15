@@ -30,6 +30,10 @@
   "heightCm": "Height (cm)",
   "startingWeightKg": "Starting weight (kg)",
   "profileSaved": "Profile saved.",
+  "assignedCoach": "Assigned coach",
+  "joinCoach": "Join coach",
+  "noCoachAssigned": "No coach assigned yet.",
+  "noClients": "No clients connected yet.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -48,7 +52,8 @@
     "nameMin": "Enter your full name.",
     "goalMin": "Enter a goal.",
     "trainingLevelMin": "Enter a training level.",
-    "number": "Enter a valid number."
+    "number": "Enter a valid number.",
+    "inviteCodeMin": "Enter a valid invite code."
   },
   "errors": {
     "generic": "Something went wrong. Try again."

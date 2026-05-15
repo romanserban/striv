@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has the initial auth/profile database migration, and includes coach/client profile editing screens.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile database migrations, includes coach/client profile editing screens, and supports invite-code coach/client connections.
 
 ---
 
@@ -29,7 +29,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Role-based onboarding
 - [x] Coach profile
 - [x] Client profile
-- [ ] Invite code system
+- [x] Invite code system
 - [ ] Exercise library
 - [ ] Workout builder
 - [ ] Workout assignment
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Coach and client profile editing completed on 2026-05-15.
+Invite-code coach/client connection completed on 2026-05-15.
 
 ---
 
@@ -83,6 +83,9 @@ Coach and client profile editing completed on 2026-05-15.
 - Coach settings can update full name, bio, and specialty and displays the generated invite code.
 - Client profile can update full name, goal, training level, height, and starting weight.
 - Profile screens use `services/profiles.ts`; Supabase calls stay out of UI components.
+- `supabase/migrations/202605150002_invite_connections.sql` adds RPCs for joining a coach, reading the assigned coach, and reading assigned clients.
+- Client profile includes invite-code join and assigned coach display.
+- Coach clients screen lists connected clients.
 
 ---
 
@@ -90,14 +93,14 @@ Coach and client profile editing completed on 2026-05-15.
 
 - npm audit reports 9 dependency vulnerabilities from the initial install; no `npm audit fix --force` was run because it may introduce breaking changes.
 - `npx expo start --clear --localhost` was started briefly and did not crash, but it did not print a QR code before being stopped; close any already-running Expo CLI terminals before starting again.
-- Auth flows require applying `supabase/migrations/202605150001_create_profiles.sql` to the Supabase project.
+- Auth/profile/invite flows require applying all migrations in `supabase/migrations` to the Supabase project.
 - The full auth flow has not been manually tested against a real Supabase project in this session.
 
 ---
 
 # Next Recommended Task
 
-Build the invite-code connection flow so clients can join a coach and coaches can see connected clients.
+Start the exercise library foundation: database migration for exercises, service functions, and a coach exercise list placeholder.
 
 ---
 
@@ -138,6 +141,7 @@ Build the invite-code connection flow so clients can join a coach and coaches ca
 - services/profiles.ts
 - features/settings/profileSchemas.ts
 - types/roleProfiles.ts
+- supabase/migrations/202605150002_invite_connections.sql
 
 ---
 

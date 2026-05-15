@@ -30,6 +30,10 @@
   "heightCm": "Inaltime (cm)",
   "startingWeightKg": "Greutate initiala (kg)",
   "profileSaved": "Profil salvat.",
+  "assignedCoach": "Antrenor asignat",
+  "joinCoach": "Alatura-te antrenorului",
+  "noCoachAssigned": "Nu ai un antrenor asignat inca.",
+  "noClients": "Nu exista clienti conectati inca.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -48,7 +52,8 @@
     "nameMin": "Introdu numele complet.",
     "goalMin": "Introdu un obiectiv.",
     "trainingLevelMin": "Introdu nivelul de antrenament.",
-    "number": "Introdu un numar valid."
+    "number": "Introdu un numar valid.",
+    "inviteCodeMin": "Introdu un cod de invitatie valid."
   },
   "errors": {
     "generic": "Ceva nu a mers bine. Incearca din nou."
