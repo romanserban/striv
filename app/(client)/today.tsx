@@ -1,19 +1,34 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
 import { assignmentsService } from "@/services/assignments";
+import { workoutLogsService } from "@/services/workoutLogs";
 import { colors, spacing, typography } from "@/theme";
 
 export default function ClientTodayScreen() {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const assignedWorkoutsQuery = useQuery({
     queryKey: ["clientAssignedWorkouts"],
     queryFn: assignmentsService.listClientAssignedWorkouts
+  });
+  const startWorkoutMutation = useMutation({
+    mutationFn: workoutLogsService.startWorkout,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["clientAssignedWorkouts"] });
+    }
+  });
+  const completeWorkoutMutation = useMutation({
+    mutationFn: workoutLogsService.completeWorkout,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["clientAssignedWorkouts"] });
+    }
   });
 
   return (
@@ -38,6 +53,21 @@ export default function ClientTodayScreen() {
               ) : null}
               <Text style={styles.meta}>{workout.scheduled_date}</Text>
               <Text style={styles.status}>{workout.status}</Text>
+              {workout.status === "assigned" ? (
+                <Button
+                  label={t("startWorkout")}
+                  loading={startWorkoutMutation.isPending}
+                  onPress={() => startWorkoutMutation.mutate(workout.id)}
+                />
+              ) : null}
+              {workout.status !== "completed" ? (
+                <Button
+                  label={t("completeWorkout")}
+                  loading={completeWorkoutMutation.isPending}
+                  onPress={() => completeWorkoutMutation.mutate(workout.id)}
+                  variant="secondary"
+                />
+              ) : null}
             </View>
           </Card>
         ))}

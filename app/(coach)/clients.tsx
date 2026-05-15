@@ -162,6 +162,7 @@ export default function CoachClientsScreen() {
               <Text style={styles.meta}>
                 {workout.client_profiles?.profiles?.full_name ?? t("client")} - {workout.scheduled_date}
               </Text>
+              <Text style={styles.status}>{workout.status}</Text>
             </View>
           ))}
         </View>
@@ -201,5 +202,11 @@ const styles = StyleSheet.create({
     color: colors.success,
     fontSize: typography.size.sm,
     lineHeight: typography.lineHeight.sm
+  },
+  status: {
+    color: colors.primary,
+    fontSize: typography.size.sm,
+    lineHeight: typography.lineHeight.sm,
+    fontWeight: typography.weight.semibold
   }
 });

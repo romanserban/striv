@@ -70,6 +70,10 @@
   "workoutAssigned": "Antrenament asignat.",
   "assignedWorkouts": "Antrenamente asignate",
   "noAssignedWorkouts": "Nu exista antrenamente asignate inca.",
+  "startWorkout": "Incepe antrenamentul",
+  "completeWorkout": "Finalizeaza antrenamentul",
+  "workoutStarted": "Antrenament inceput.",
+  "workoutCompleted": "Antrenament finalizat.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",

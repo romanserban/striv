@@ -70,6 +70,10 @@
   "workoutAssigned": "Workout assigned.",
   "assignedWorkouts": "Assigned workouts",
   "noAssignedWorkouts": "No assigned workouts yet.",
+  "startWorkout": "Start workout",
+  "completeWorkout": "Complete workout",
+  "workoutStarted": "Workout started.",
+  "workoutCompleted": "Workout completed.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",

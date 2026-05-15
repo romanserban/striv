@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, and supports assigning workouts to clients.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, and has basic workout start/complete logging.
 
 ---
 
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Workout assignment foundation completed on 2026-05-15.
+Workout logging foundation completed on 2026-05-15.
 
 ---
 
@@ -94,6 +94,9 @@ Workout assignment foundation completed on 2026-05-15.
 - `supabase/migrations/202605150005_create_assigned_workouts.sql` creates assigned workouts and RLS for coaches/clients.
 - Coach Clients tab supports selecting a connected client, selecting a workout template, and assigning it for a scheduled date.
 - Client Today tab lists assigned workouts.
+- `supabase/migrations/202605150006_create_workout_logs.sql` creates workout logs and set log tables.
+- Client Today tab supports starting and completing assigned workouts.
+- Coach Clients tab shows assigned workout status.
 
 ---
 
@@ -108,7 +111,7 @@ Workout assignment foundation completed on 2026-05-15.
 
 # Next Recommended Task
 
-Start workout logging foundation: workout log tables/service and client completion flow.
+Implement set-level workout logging for actual reps and weight.
 
 ---
 
@@ -162,6 +165,9 @@ Start workout logging foundation: workout log tables/service and client completi
 - services/assignments.ts
 - features/workouts/assignmentSchemas.ts
 - types/assignedWorkout.ts
+- supabase/migrations/202605150006_create_workout_logs.sql
+- services/workoutLogs.ts
+- types/workoutLog.ts
 
 ---
 
