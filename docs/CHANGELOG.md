@@ -25,6 +25,7 @@
 - Coach connected-client list.
 - Exercise table migration with RLS for global and coach-owned custom exercises.
 - Exercise service, validation schema, schema tests, and basic coach exercise list/create UI.
+- Workout template migration with RLS, service functions, validation schema/tests, and basic coach template create/list UI.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.

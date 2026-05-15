@@ -42,6 +42,11 @@
   "createExercise": "Create exercise",
   "exerciseSaved": "Exercise saved.",
   "noExercises": "No exercises yet.",
+  "workoutName": "Workout name",
+  "description": "Description",
+  "createWorkout": "Create workout",
+  "workoutSaved": "Workout saved.",
+  "noWorkoutTemplates": "No workout templates yet.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -64,6 +69,7 @@
     "inviteCodeMin": "Enter a valid invite code.",
     "exerciseNameMin": "Enter an exercise name.",
     "muscleGroupMin": "Enter a muscle group.",
+    "workoutNameMin": "Enter a workout name.",
     "url": "Enter a valid URL."
   },
   "errors": {

@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, and has a basic coach exercise library.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout-template database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, and supports creating/listing workout templates.
 
 ---
 
@@ -31,7 +31,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Client profile
 - [x] Invite code system
 - [x] Exercise library
-- [ ] Workout builder
+- [x] Workout builder
 - [ ] Workout assignment
 - [ ] Workout logging
 - [ ] Progress tracking
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Exercise library foundation completed on 2026-05-15.
+Workout template foundation completed on 2026-05-15.
 
 ---
 
@@ -88,6 +88,8 @@ Exercise library foundation completed on 2026-05-15.
 - Coach clients screen lists connected clients.
 - `supabase/migrations/202605150003_create_exercises.sql` creates the exercises table and RLS for global and coach custom exercises.
 - Coach Workouts tab currently hosts the basic exercise library list/create flow; workout builder is not implemented yet.
+- `supabase/migrations/202605150004_create_workout_templates.sql` creates workout template tables and RLS.
+- Coach Workouts tab supports creating/listing workout templates, but adding exercises to templates is still pending.
 
 ---
 
@@ -102,7 +104,7 @@ Exercise library foundation completed on 2026-05-15.
 
 # Next Recommended Task
 
-Start workout builder foundation: workout template tables, services, and basic coach template creation.
+Add exercises to workout templates, then implement edit/duplicate/delete template actions.
 
 ---
 
@@ -148,6 +150,10 @@ Start workout builder foundation: workout template tables, services, and basic c
 - services/exercises.ts
 - features/workouts/exerciseSchemas.ts
 - types/exercise.ts
+- supabase/migrations/202605150004_create_workout_templates.sql
+- services/workouts.ts
+- features/workouts/workoutSchemas.ts
+- types/workout.ts
 
 ---
 

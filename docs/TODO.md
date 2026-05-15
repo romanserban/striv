@@ -47,7 +47,7 @@
 - [x] Add coach_profiles table
 - [x] Add client_profiles table
 - [x] Add exercises table
-- [ ] Add workout tables
+- [x] Add workout tables
 - [ ] Add progress tables
 - [ ] Add chat tables
 - [ ] Add scheduled_sessions table
@@ -69,7 +69,7 @@
 
 # Phase 6 — Workouts
 
-- [ ] Workout builder
+- [x] Workout builder
 - [ ] Add exercises to workout
 - [ ] Edit workout
 - [ ] Duplicate workout

@@ -42,6 +42,11 @@
   "createExercise": "Creeaza exercitiu",
   "exerciseSaved": "Exercitiu salvat.",
   "noExercises": "Nu exista exercitii inca.",
+  "workoutName": "Nume antrenament",
+  "description": "Descriere",
+  "createWorkout": "Creeaza antrenament",
+  "workoutSaved": "Antrenament salvat.",
+  "noWorkoutTemplates": "Nu exista sabloane de antrenament inca.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -64,6 +69,7 @@
     "inviteCodeMin": "Introdu un cod de invitatie valid.",
     "exerciseNameMin": "Introdu numele exercitiului.",
     "muscleGroupMin": "Introdu grupa musculara.",
+    "workoutNameMin": "Introdu numele antrenamentului.",
     "url": "Introdu un URL valid."
   },
   "errors": {
