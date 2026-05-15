@@ -19,13 +19,28 @@
   "email": "Email",
   "password": "Password",
   "name": "Name",
+  "fullName": "Full name",
+  "continue": "Continue",
+  "save": "Save",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
     "loginTitle": "Log in to Striv",
     "signupTitle": "Create your Striv account",
     "forgotTitle": "Reset your password",
-    "chooseRoleTitle": "How will you use Striv?"
+    "chooseRoleTitle": "How will you use Striv?",
+    "selectRoleFirst": "Choose a role before creating your account.",
+    "resetSent": "If that email exists, reset instructions were sent.",
+    "checkEmail": "Check your email to confirm your account, then log in.",
+    "missingProfile": "Choose your role to finish account setup."
+  },
+  "validation": {
+    "email": "Enter a valid email address.",
+    "passwordMin": "Password must be at least 6 characters.",
+    "nameMin": "Enter your full name."
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again."
   },
   "placeholder": {
     "screenBody": "This foundation screen is ready for the next MVP step.",

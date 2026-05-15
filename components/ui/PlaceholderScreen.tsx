@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 
@@ -8,9 +9,10 @@ import { colors, spacing, typography } from "@/theme";
 
 type PlaceholderScreenProps = {
   titleKey: string;
+  children?: ReactNode;
 };
 
-export function PlaceholderScreen({ titleKey }: PlaceholderScreenProps) {
+export function PlaceholderScreen({ titleKey, children }: PlaceholderScreenProps) {
   const { t } = useTranslation();
 
   return (
@@ -19,9 +21,11 @@ export function PlaceholderScreen({ titleKey }: PlaceholderScreenProps) {
         <Text style={styles.eyebrow}>{t("welcome")}</Text>
         <Text style={styles.title}>{t(titleKey)}</Text>
       </View>
-      <Card>
-        <EmptyState title={t("placeholder.emptyTitle")} body={t("placeholder.screenBody")} />
-      </Card>
+      {children ?? (
+        <Card>
+          <EmptyState title={t("placeholder.emptyTitle")} body={t("placeholder.screenBody")} />
+        </Card>
+      )}
     </Screen>
   );
 }

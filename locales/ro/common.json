@@ -19,13 +19,28 @@
   "email": "Email",
   "password": "Parola",
   "name": "Nume",
+  "fullName": "Nume complet",
+  "continue": "Continua",
+  "save": "Salveaza",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
     "loginTitle": "Autentifica-te in Striv",
     "signupTitle": "Creeaza contul Striv",
     "forgotTitle": "Reseteaza parola",
-    "chooseRoleTitle": "Cum vei folosi Striv?"
+    "chooseRoleTitle": "Cum vei folosi Striv?",
+    "selectRoleFirst": "Alege un rol inainte de a crea contul.",
+    "resetSent": "Daca emailul exista, instructiunile de resetare au fost trimise.",
+    "checkEmail": "Verifica emailul pentru confirmarea contului, apoi autentifica-te.",
+    "missingProfile": "Alege rolul pentru a finaliza configurarea contului."
+  },
+  "validation": {
+    "email": "Introdu o adresa de email valida.",
+    "passwordMin": "Parola trebuie sa aiba cel putin 6 caractere.",
+    "nameMin": "Introdu numele complet."
+  },
+  "errors": {
+    "generic": "Ceva nu a mers bine. Incearca din nou."
   },
   "placeholder": {
     "screenBody": "Acest ecran de baza este pregatit pentru urmatorul pas MVP.",

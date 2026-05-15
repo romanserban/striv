@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded and aligned to Expo SDK 54 for Expo Go compatibility.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, and includes the first Supabase Auth flow implementation.
 
 ---
 
@@ -25,8 +25,8 @@ Expo React Native TypeScript foundation has been scaffolded and aligned to Expo 
 # Completed Features
 
 - [x] Project setup
-- [ ] Authentication
-- [ ] Role-based onboarding
+- [x] Authentication
+- [x] Role-based onboarding
 - [ ] Coach profile
 - [ ] Client profile
 - [ ] Invite code system
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-App foundation completed on 2026-05-15.
+Auth foundation completed on 2026-05-15.
 
 ---
 
@@ -75,6 +75,9 @@ App foundation completed on 2026-05-15.
 - Supabase client lives in `lib/supabase.ts`; UI components should call services/hooks, not Supabase directly.
 - Current scaffold uses Expo Router route groups for auth, coach, and client tabs.
 - The project uses Expo SDK 54 because the App Store Expo Go app may not run SDK 55 projects during the SDK 55 transition period.
+- Auth UI uses React Hook Form and Zod schemas.
+- Auth screens call service functions in `services/auth.ts`; Supabase is not called directly from UI components.
+- Signup attempts to create/update a `profiles` row after Supabase Auth signup.
 
 ---
 
@@ -82,12 +85,14 @@ App foundation completed on 2026-05-15.
 
 - npm audit reports 9 dependency vulnerabilities from the initial install; no `npm audit fix --force` was run because it may introduce breaking changes.
 - `npx expo start --clear --localhost` was started briefly and did not crash, but it did not print a QR code before being stopped; close any already-running Expo CLI terminals before starting again.
+- Auth flows require the `profiles` table from `docs/DB_SCHEMA.md`; without database migrations, signup/profile role completion will fail after Supabase Auth succeeds.
+- The full auth flow has not been manually tested against a real Supabase project in this session.
 
 ---
 
 # Next Recommended Task
 
-Build authentication service/forms and role-based redirects using Supabase Auth.
+Create Supabase migrations for `profiles`, role-specific profile tables, and RLS policies.
 
 ---
 
@@ -119,6 +124,11 @@ Build authentication service/forms and role-based redirects using Supabase Auth.
 - utils/
 - __tests__/
 - expo-env.d.ts
+- features/auth/
+- services/auth.ts
+- store/authStore.ts
+- hooks/useAuthBootstrap.ts
+- types/profile.ts
 
 ---
 

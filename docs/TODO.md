@@ -18,14 +18,14 @@
 
 # Phase 2 — Authentication
 
-- [ ] Login
-- [ ] Signup
-- [ ] Forgot password
-- [ ] Logout
-- [ ] Role selection
-- [ ] Role-based redirects
-- [ ] Supabase auth integration
-- [ ] Profile creation after signup
+- [x] Login
+- [x] Signup
+- [x] Forgot password
+- [x] Logout
+- [x] Role selection
+- [x] Role-based redirects
+- [x] Supabase auth integration
+- [x] Profile creation after signup
 
 ---
 
@@ -144,7 +144,7 @@
 - [x] Add React Native Testing Library
 - [x] Add jest-native
 - [ ] Add utility tests
-- [ ] Add validation schema tests
+- [x] Add validation schema tests
 - [x] Add reusable component tests
 
 ---
