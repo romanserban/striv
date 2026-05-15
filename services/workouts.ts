@@ -7,6 +7,12 @@ type CreateWorkoutTemplateInput = {
   description?: string;
 };
 
+type UpdateWorkoutTemplateInput = {
+  workoutTemplateId: string;
+  name: string;
+  description?: string;
+};
+
 type AddExerciseToWorkoutTemplateInput = {
   workoutTemplateId: string;
   exerciseId: string;
@@ -49,6 +55,82 @@ export const workoutsService = {
     }
 
     return data;
+  },
+
+  async updateWorkoutTemplate({ workoutTemplateId, name, description }: UpdateWorkoutTemplateInput) {
+    const { data, error } = await supabase
+      .from("workout_templates")
+      .update({
+        name,
+        description: description || null
+      })
+      .eq("id", workoutTemplateId)
+      .select("id, coach_id, name, description, created_at, updated_at")
+      .single<WorkoutTemplate>();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
+
+  async deleteWorkoutTemplate(workoutTemplateId: string) {
+    const { error } = await supabase.from("workout_templates").delete().eq("id", workoutTemplateId);
+
+    if (error) {
+      throw error;
+    }
+  },
+
+  async duplicateWorkoutTemplate(workoutTemplateId: string) {
+    const { data: template, error: templateError } = await supabase
+      .from("workout_templates")
+      .select("id, coach_id, name, description")
+      .eq("id", workoutTemplateId)
+      .single<WorkoutTemplate>();
+
+    if (templateError) {
+      throw templateError;
+    }
+
+    const duplicatedTemplate = await workoutsService.createWorkoutTemplate({
+      coachId: template.coach_id,
+      name: `${template.name} Copy`,
+      description: template.description ?? undefined
+    });
+
+    const { data: exercises, error: exercisesError } = await supabase
+      .from("workout_template_exercises")
+      .select("exercise_id, order_index, sets, reps, target_weight, rest_seconds, tempo, notes")
+      .eq("workout_template_id", workoutTemplateId)
+      .order("order_index", { ascending: true });
+
+    if (exercisesError) {
+      throw exercisesError;
+    }
+
+    if (exercises?.length) {
+      const { error: insertError } = await supabase.from("workout_template_exercises").insert(
+        exercises.map((exercise) => ({
+          workout_template_id: duplicatedTemplate.id,
+          exercise_id: exercise.exercise_id,
+          order_index: exercise.order_index,
+          sets: exercise.sets,
+          reps: exercise.reps,
+          target_weight: exercise.target_weight,
+          rest_seconds: exercise.rest_seconds,
+          tempo: exercise.tempo,
+          notes: exercise.notes
+        }))
+      );
+
+      if (insertError) {
+        throw insertError;
+      }
+    }
+
+    return duplicatedTemplate;
   },
 
   async listWorkoutTemplateExercises() {

@@ -56,6 +56,13 @@
   "restSeconds": "Rest seconds",
   "tempo": "Tempo",
   "exerciseAdded": "Exercise added.",
+  "edit": "Edit",
+  "duplicate": "Duplicate",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "workoutUpdated": "Workout updated.",
+  "workoutDeleted": "Workout deleted.",
+  "workoutDuplicated": "Workout duplicated.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",

@@ -30,6 +30,7 @@ export default function CoachWorkoutsScreen() {
   const session = useAuthStore((state) => state.session);
   const userId = session?.user.id;
   const [selectedWorkoutTemplateId, setSelectedWorkoutTemplateId] = useState<string | null>(null);
+  const [editingWorkoutTemplateId, setEditingWorkoutTemplateId] = useState<string | null>(null);
   const {
     control,
     handleSubmit,
@@ -128,6 +129,45 @@ export default function CoachWorkoutsScreen() {
       queryClient.invalidateQueries({ queryKey: ["workoutTemplates"] });
     }
   });
+  const updateWorkoutMutation = useMutation({
+    mutationFn: (values: WorkoutTemplateFormValues) => {
+      if (!editingWorkoutTemplateId) {
+        throw new Error(t("errors.generic"));
+      }
+
+      return workoutsService.updateWorkoutTemplate({
+        workoutTemplateId: editingWorkoutTemplateId,
+        name: values.name,
+        description: values.description
+      });
+    },
+    onSuccess: () => {
+      setEditingWorkoutTemplateId(null);
+      resetWorkout();
+      queryClient.invalidateQueries({ queryKey: ["workoutTemplates"] });
+    }
+  });
+  const duplicateWorkoutMutation = useMutation({
+    mutationFn: workoutsService.duplicateWorkoutTemplate,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["workoutTemplates"] });
+      queryClient.invalidateQueries({ queryKey: ["workoutTemplateExercises"] });
+    }
+  });
+  const deleteWorkoutMutation = useMutation({
+    mutationFn: workoutsService.deleteWorkoutTemplate,
+    onSuccess: (_, workoutTemplateId) => {
+      if (selectedWorkoutTemplateId === workoutTemplateId) {
+        setSelectedWorkoutTemplateId(null);
+      }
+      if (editingWorkoutTemplateId === workoutTemplateId) {
+        setEditingWorkoutTemplateId(null);
+        resetWorkout();
+      }
+      queryClient.invalidateQueries({ queryKey: ["workoutTemplates"] });
+      queryClient.invalidateQueries({ queryKey: ["workoutTemplateExercises"] });
+    }
+  });
   const addExerciseMutation = useMutation({
     mutationFn: ({
       exerciseId,
@@ -167,7 +207,30 @@ export default function CoachWorkoutsScreen() {
   };
 
   const onWorkoutSubmit = (values: WorkoutTemplateFormValues) => {
+    if (editingWorkoutTemplateId) {
+      updateWorkoutMutation.mutate(values);
+      return;
+    }
+
     createWorkoutMutation.mutate(values);
+  };
+
+  const editWorkoutTemplate = (templateId: string) => {
+    const template = workoutTemplatesQuery.data?.find((candidate) => candidate.id === templateId);
+    if (!template) {
+      return;
+    }
+
+    setEditingWorkoutTemplateId(template.id);
+    resetWorkout({
+      name: template.name,
+      description: template.description ?? ""
+    });
+  };
+
+  const cancelWorkoutEdit = () => {
+    setEditingWorkoutTemplateId(null);
+    resetWorkout();
   };
 
   const addExerciseToSelectedWorkout = (exerciseId: string) => {
@@ -206,12 +269,17 @@ export default function CoachWorkoutsScreen() {
             )}
           />
           {createWorkoutMutation.error ? <Text style={styles.error}>{createWorkoutMutation.error.message}</Text> : null}
+          {updateWorkoutMutation.error ? <Text style={styles.error}>{updateWorkoutMutation.error.message}</Text> : null}
           {createWorkoutMutation.isSuccess ? <Text style={styles.success}>{t("workoutSaved")}</Text> : null}
+          {updateWorkoutMutation.isSuccess ? <Text style={styles.success}>{t("workoutUpdated")}</Text> : null}
           <Button
-            label={t("createWorkout")}
-            loading={createWorkoutMutation.isPending}
+            label={editingWorkoutTemplateId ? t("save") : t("createWorkout")}
+            loading={createWorkoutMutation.isPending || updateWorkoutMutation.isPending}
             onPress={handleWorkoutSubmit(onWorkoutSubmit)}
           />
+          {editingWorkoutTemplateId ? (
+            <Button label={t("cancel")} onPress={cancelWorkoutEdit} variant="ghost" />
+          ) : null}
         </View>
       </Card>
       {workoutTemplatesQuery.isLoading ? (
@@ -235,6 +303,21 @@ export default function CoachWorkoutsScreen() {
                 onPress={() => setSelectedWorkoutTemplateId(template.id)}
                 variant={selectedWorkoutTemplateId === template.id ? "primary" : "secondary"}
               />
+              <View style={styles.actions}>
+                <Button label={t("edit")} onPress={() => editWorkoutTemplate(template.id)} variant="secondary" />
+                <Button
+                  label={t("duplicate")}
+                  loading={duplicateWorkoutMutation.isPending}
+                  onPress={() => duplicateWorkoutMutation.mutate(template.id)}
+                  variant="secondary"
+                />
+                <Button
+                  label={t("delete")}
+                  loading={deleteWorkoutMutation.isPending}
+                  onPress={() => deleteWorkoutMutation.mutate(template.id)}
+                  variant="ghost"
+                />
+              </View>
               {workoutTemplateExercisesQuery.data
                 ?.filter((exercise) => exercise.workout_template_id === template.id)
                 .map((exercise) => (
@@ -255,6 +338,12 @@ export default function CoachWorkoutsScreen() {
         <View style={styles.form}>
           <Text style={styles.sectionTitle}>{t("selectedWorkout")}</Text>
           <Text style={styles.meta}>{selectedWorkoutTemplate?.name ?? t("selectWorkout")}</Text>
+          {duplicateWorkoutMutation.isSuccess ? <Text style={styles.success}>{t("workoutDuplicated")}</Text> : null}
+          {deleteWorkoutMutation.isSuccess ? <Text style={styles.success}>{t("workoutDeleted")}</Text> : null}
+          {duplicateWorkoutMutation.error ? (
+            <Text style={styles.error}>{duplicateWorkoutMutation.error.message}</Text>
+          ) : null}
+          {deleteWorkoutMutation.error ? <Text style={styles.error}>{deleteWorkoutMutation.error.message}</Text> : null}
           <Controller
             control={workoutExerciseControl}
             name="sets"
@@ -409,6 +498,9 @@ const styles = StyleSheet.create({
   templateExercise: {
     gap: spacing.xs,
     paddingTop: spacing.sm
+  },
+  actions: {
+    gap: spacing.sm
   },
   sectionTitle: {
     color: colors.textPrimary,

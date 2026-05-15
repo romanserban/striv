@@ -56,6 +56,13 @@
   "restSeconds": "Pauza in secunde",
   "tempo": "Tempo",
   "exerciseAdded": "Exercitiu adaugat.",
+  "edit": "Editeaza",
+  "duplicate": "Duplica",
+  "delete": "Sterge",
+  "cancel": "Anuleaza",
+  "workoutUpdated": "Antrenament actualizat.",
+  "workoutDeleted": "Antrenament sters.",
+  "workoutDuplicated": "Antrenament duplicat.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",

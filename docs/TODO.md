@@ -71,9 +71,9 @@
 
 - [x] Workout builder
 - [x] Add exercises to workout
-- [ ] Edit workout
-- [ ] Duplicate workout
-- [ ] Delete workout
+- [x] Edit workout
+- [x] Duplicate workout
+- [x] Delete workout
 - [ ] Assign workout to client
 - [ ] Scheduled workout appears for client
 
