@@ -37,7 +37,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Progress tracking
 - [x] Progress photos
 - [x] Chat
-- [ ] Calendar
+- [x] Calendar
 - [ ] Notifications
 - [ ] Settings
 - [x] i18n
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Chat foundation completed on 2026-05-15.
+Calendar foundation completed on 2026-05-15.
 
 ---
 
@@ -107,6 +107,9 @@ Chat foundation completed on 2026-05-15.
 - `supabase/migrations/202605150010_create_chat.sql` creates coach-client conversations, messages, RLS policies, realtime publication setup, and a guarded get-or-create conversation RPC.
 - Coach Chat tab supports viewing conversations, starting a conversation from assigned clients, opening a chat thread, sending messages, and receiving realtime message updates.
 - Client Chat tab supports opening the assigned coach conversation, sending messages, and receiving realtime message updates.
+- `supabase/migrations/202605150011_create_scheduled_sessions.sql` creates scheduled coaching sessions with RLS for coaches and clients.
+- Coach Calendar tab supports creating sessions for connected clients, rescheduling sessions, cancelling sessions, and viewing assigned workouts.
+- Client Calendar tab supports viewing scheduled coaching sessions and assigned workouts.
 
 ---
 
@@ -117,12 +120,13 @@ Chat foundation completed on 2026-05-15.
 - Auth/profile/invite flows require applying all migrations in `supabase/migrations` to the Supabase project.
 - The full auth flow has not been manually tested against a real Supabase project in this session.
 - Chat requires applying `supabase/migrations/202605150010_create_chat.sql`; realtime behavior still needs manual testing against a real Supabase project.
+- Calendar requires applying `supabase/migrations/202605150011_create_scheduled_sessions.sql`; session flows still need manual testing against a real Supabase project.
 
 ---
 
 # Next Recommended Task
 
-Start calendar foundation: scheduled session tables, service, and basic coach/client calendar screens.
+Start notifications foundation: notification permission, push token storage, and notification service preparation.
 
 ---
 
@@ -195,6 +199,13 @@ Start calendar foundation: scheduled session tables, service, and basic coach/cl
 - app/(coach)/chat.tsx
 - app/(client)/chat.tsx
 - __tests__/chatSchemas.test.ts
+- supabase/migrations/202605150011_create_scheduled_sessions.sql
+- services/calendar.ts
+- types/scheduledSession.ts
+- features/calendar/sessionSchemas.ts
+- app/(coach)/calendar.tsx
+- app/(client)/calendar.tsx
+- __tests__/sessionSchemas.test.ts
 
 ---
 

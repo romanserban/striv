@@ -163,6 +163,8 @@ Do not write unit tests for:
 - coach can cancel session
 - client can view session
 - client cannot edit session
+- coach calendar shows assigned workouts
+- client calendar shows assigned workouts
 
 ## i18n
 - app works in English

@@ -36,6 +36,8 @@
 - Local demo user seed script for one coach and one connected client.
 - Added chat migration with conversation/message tables, RLS, realtime publication setup, and guarded get-or-create conversation RPC.
 - Added message service, chat validation schema/test, reusable message bubble, shared chat thread UI, and coach/client chat screens.
+- Added scheduled session migration with RLS, calendar service, session validation schema/test, and coach/client calendar screens.
+- Added coach session create, reschedule, cancel flows plus calendar views for sessions and assigned workouts.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.

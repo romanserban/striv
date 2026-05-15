@@ -50,7 +50,7 @@
 - [x] Add workout tables
 - [x] Add progress tables
 - [x] Add chat tables
-- [ ] Add scheduled_sessions table
+- [x] Add scheduled_sessions table
 - [x] Add RLS policies
 - [x] Add private storage bucket
 - [ ] Seed global exercises
@@ -118,12 +118,12 @@
 
 # Phase 10 — Calendar
 
-- [ ] Coach creates session
-- [ ] Coach reschedules session
-- [ ] Coach cancels session
-- [ ] Client views sessions
-- [ ] Calendar shows workouts
-- [ ] Calendar shows coaching sessions
+- [x] Coach creates session
+- [x] Coach reschedules session
+- [x] Coach cancels session
+- [x] Client views sessions
+- [x] Calendar shows workouts
+- [x] Calendar shows coaching sessions
 
 ---
 
