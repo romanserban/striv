@@ -52,7 +52,7 @@
 - [ ] Add chat tables
 - [ ] Add scheduled_sessions table
 - [x] Add RLS policies
-- [ ] Add private storage bucket
+- [x] Add private storage bucket
 - [ ] Seed global exercises
 
 ---
@@ -98,7 +98,7 @@
 - [x] Measurement logging
 - [x] Energy level
 - [x] Notes
-- [ ] Progress photo upload
+- [x] Progress photo upload
 - [ ] Image compression
 - [ ] Progress chart
 - [ ] Coach progress view

@@ -1,8 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import * as ImagePicker from "expo-image-picker";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -49,6 +50,10 @@ export default function ClientProgressScreen() {
     queryKey: ["progressEntries"],
     queryFn: progressService.listProgressEntries
   });
+  const progressPhotosQuery = useQuery({
+    queryKey: ["progressPhotos"],
+    queryFn: progressService.listProgressPhotos
+  });
   const saveProgressMutation = useMutation({
     mutationFn: (values: ProgressEntryFormValues) => {
       const clientId = clientProfileQuery.data?.id;
@@ -70,6 +75,41 @@ export default function ClientProgressScreen() {
     onSuccess: () => {
       reset();
       queryClient.invalidateQueries({ queryKey: ["progressEntries"] });
+    }
+  });
+  const uploadPhotoMutation = useMutation({
+    mutationFn: async () => {
+      const clientId = clientProfileQuery.data?.id;
+      if (!clientId) {
+        throw new Error(t("errors.generic"));
+      }
+
+      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permission.granted) {
+        throw new Error(t("photoPermissionDenied"));
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: true,
+        quality: 0.75
+      });
+
+      if (result.canceled || !result.assets[0]) {
+        return null;
+      }
+
+      return progressService.uploadProgressPhoto({
+        clientId,
+        uri: result.assets[0].uri,
+        mimeType: result.assets[0].mimeType,
+        photoType: "progress"
+      });
+    },
+    onSuccess: (photo) => {
+      if (photo) {
+        queryClient.invalidateQueries({ queryKey: ["progressPhotos"] });
+      }
     }
   });
 
@@ -177,6 +217,38 @@ export default function ClientProgressScreen() {
           <Button label={t("saveProgress")} loading={saveProgressMutation.isPending} onPress={handleSubmit(onSubmit)} />
         </View>
       </Card>
+      <Card>
+        <View style={styles.form}>
+          <Text style={styles.name}>{t("progressPhotos")}</Text>
+          {uploadPhotoMutation.error ? <Text style={styles.error}>{uploadPhotoMutation.error.message}</Text> : null}
+          {uploadPhotoMutation.isSuccess ? <Text style={styles.success}>{t("photoUploaded")}</Text> : null}
+          <Button
+            label={t("uploadPhoto")}
+            loading={uploadPhotoMutation.isPending}
+            onPress={() => uploadPhotoMutation.mutate()}
+          />
+        </View>
+      </Card>
+      {progressPhotosQuery.isLoading ? (
+        <Card>
+          <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
+        </Card>
+      ) : null}
+      {!progressPhotosQuery.isLoading && !progressPhotosQuery.data?.length ? (
+        <Card>
+          <EmptyState title={t("noProgressPhotos")} body={t("placeholder.emptyBody")} />
+        </Card>
+      ) : null}
+      <View style={styles.list}>
+        {progressPhotosQuery.data?.map((photo) => (
+          <Card key={photo.id}>
+            <View style={styles.entry}>
+              {photo.signed_url ? <Image source={{ uri: photo.signed_url }} style={styles.photo} /> : null}
+              <Text style={styles.meta}>{new Date(photo.created_at).toLocaleDateString()}</Text>
+            </View>
+          </Card>
+        ))}
+      </View>
       {progressEntriesQuery.isLoading ? (
         <Card>
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
@@ -215,6 +287,12 @@ const styles = StyleSheet.create({
   },
   entry: {
     gap: spacing.xs
+  },
+  photo: {
+    width: "100%",
+    aspectRatio: 1,
+    borderRadius: 16,
+    backgroundColor: colors.surface
   },
   name: {
     color: colors.textPrimary,

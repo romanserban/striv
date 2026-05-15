@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging/progress database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, has client workout start/complete plus set-level workout logging, and includes basic client progress tracking.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging/progress database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, has client workout start/complete plus set-level workout logging, and includes basic client progress tracking with progress photo upload.
 
 ---
 
@@ -35,7 +35,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Workout assignment
 - [x] Workout logging
 - [x] Progress tracking
-- [ ] Progress photos
+- [x] Progress photos
 - [ ] Chat
 - [ ] Calendar
 - [ ] Notifications
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Basic client progress tracking completed on 2026-05-15.
+Progress photo upload foundation completed on 2026-05-15.
 
 ---
 
@@ -102,6 +102,8 @@ Basic client progress tracking completed on 2026-05-15.
 - Coach Clients tab shows assigned workout status.
 - `supabase/migrations/202605150008_create_progress_entries.sql` creates progress entries and RLS for clients/coaches.
 - Client Progress tab supports logging weight, measurements, energy level, notes, and viewing history.
+- `supabase/migrations/202605150009_create_progress_photos.sql` creates private progress photo storage, photo metadata, and storage/table RLS.
+- Client Progress tab supports selecting and uploading a progress photo and viewing signed photo thumbnails.
 
 ---
 
@@ -116,7 +118,7 @@ Basic client progress tracking completed on 2026-05-15.
 
 # Next Recommended Task
 
-Add progress photos storage/table foundation and upload flow.
+Start chat foundation: conversation/message tables, service, and basic coach/client chat screens.
 
 ---
 
@@ -179,6 +181,7 @@ Add progress photos storage/table foundation and upload flow.
 - services/progress.ts
 - features/progress/progressSchemas.ts
 - types/progress.ts
+- supabase/migrations/202605150009_create_progress_photos.sql
 
 ---
 

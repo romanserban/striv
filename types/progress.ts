@@ -10,3 +10,12 @@ export type ProgressEntry = {
   notes: string | null;
   created_at: string;
 };
+
+export type ProgressPhoto = {
+  id: string;
+  client_id: string;
+  image_path: string;
+  photo_type: string | null;
+  created_at: string;
+  signed_url?: string | null;
+};
