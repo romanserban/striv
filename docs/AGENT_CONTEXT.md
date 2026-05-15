@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, and has basic workout start/complete logging.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, and has client workout start/complete plus set-level workout logging.
 
 ---
 
@@ -33,7 +33,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Exercise library
 - [x] Workout builder
 - [x] Workout assignment
-- [ ] Workout logging
+- [x] Workout logging
 - [ ] Progress tracking
 - [ ] Progress photos
 - [ ] Chat
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Workout logging foundation completed on 2026-05-15.
+Set-level workout logging completed on 2026-05-15.
 
 ---
 
@@ -95,7 +95,10 @@ Workout logging foundation completed on 2026-05-15.
 - Coach Clients tab supports selecting a connected client, selecting a workout template, and assigning it for a scheduled date.
 - Client Today tab lists assigned workouts.
 - `supabase/migrations/202605150006_create_workout_logs.sql` creates workout logs and set log tables.
+- `supabase/migrations/202605150007_workout_set_logging_policies.sql` adds client read access for assigned workout templates/exercises, update access for saved set logs, and the unique index needed for set upserts.
 - Client Today tab supports starting and completing assigned workouts.
+- Client Today tab links into an assigned workout detail/logging screen.
+- Client workout detail supports entering actual reps and actual weight per set and saving each set.
 - Coach Clients tab shows assigned workout status.
 
 ---
@@ -111,7 +114,7 @@ Workout logging foundation completed on 2026-05-15.
 
 # Next Recommended Task
 
-Implement set-level workout logging for actual reps and weight.
+Implement basic client progress tracking tables and a progress entry form.
 
 ---
 
@@ -166,8 +169,10 @@ Implement set-level workout logging for actual reps and weight.
 - features/workouts/assignmentSchemas.ts
 - types/assignedWorkout.ts
 - supabase/migrations/202605150006_create_workout_logs.sql
+- supabase/migrations/202605150007_workout_set_logging_policies.sql
 - services/workoutLogs.ts
 - types/workoutLog.ts
+- app/(client)/workout/[assignedWorkoutId].tsx
 
 ---
 

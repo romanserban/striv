@@ -7,3 +7,15 @@ export type WorkoutLog = {
   client_notes: string | null;
   created_at?: string;
 };
+
+export type WorkoutSetLog = {
+  id: string;
+  workout_log_id: string;
+  exercise_id: string;
+  set_number: number;
+  actual_reps: number | null;
+  actual_weight: number | null;
+  completed: boolean;
+  notes: string | null;
+  created_at?: string;
+};

@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import type { AssignedWorkout } from "@/types/assignedWorkout";
+import type { AssignedWorkout, AssignedWorkoutDetail } from "@/types/assignedWorkout";
 
 type CreateAssignedWorkoutInput = {
   coachId: string;
@@ -62,6 +62,22 @@ export const assignmentsService = {
     }
 
     return ((data ?? []) as unknown as AssignedWorkoutRow[]).map(normalizeAssignedWorkout);
+  },
+
+  async getClientAssignedWorkoutDetail(assignedWorkoutId: string) {
+    const { data, error } = await supabase
+      .from("assigned_workouts")
+      .select(
+        "id, coach_id, client_id, workout_template_id, scheduled_date, status, created_at, updated_at, workout_templates(id, name, description, workout_template_exercises(id, workout_template_id, exercise_id, order_index, sets, reps, target_weight, rest_seconds, tempo, notes, exercises(name, muscle_group)))"
+      )
+      .eq("id", assignedWorkoutId)
+      .single<AssignedWorkoutDetailRow>();
+
+    if (error) {
+      throw error;
+    }
+
+    return normalizeAssignedWorkoutDetail(data);
   }
 };
 
@@ -88,6 +104,32 @@ function normalizeAssignedWorkout(row: AssignedWorkoutRow): AssignedWorkout {
           profiles: Array.isArray(clientProfile.profiles)
             ? clientProfile.profiles[0] ?? null
             : clientProfile.profiles ?? null
+        }
+      : null
+  };
+}
+
+type AssignedWorkoutDetailRow = Omit<AssignedWorkoutDetail, "workout_templates" | "client_profiles"> & {
+  workout_templates?:
+    | NonNullable<AssignedWorkoutDetail["workout_templates"]>
+    | NonNullable<AssignedWorkoutDetail["workout_templates"]>[];
+  client_profiles?: AssignmentClientProfileRow | AssignmentClientProfileRow[];
+};
+
+function normalizeAssignedWorkoutDetail(row: AssignedWorkoutDetailRow): AssignedWorkoutDetail {
+  const workoutTemplate = Array.isArray(row.workout_templates)
+    ? row.workout_templates[0] ?? null
+    : row.workout_templates ?? null;
+  const exercises = [...(workoutTemplate?.workout_template_exercises ?? [])].sort(
+    (firstExercise, secondExercise) => firstExercise.order_index - secondExercise.order_index
+  );
+
+  return {
+    ...normalizeAssignedWorkout(row),
+    workout_templates: workoutTemplate
+      ? {
+          ...workoutTemplate,
+          workout_template_exercises: exercises
         }
       : null
   };

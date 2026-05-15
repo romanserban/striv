@@ -38,6 +38,7 @@ export default function ClientLayout() {
       <Tabs.Screen name="calendar" options={{ title: t("calendar"), tabBarIcon: createTabIcon(Calendar) }} />
       <Tabs.Screen name="chat" options={{ title: t("chat"), tabBarIcon: createTabIcon(MessageCircle) }} />
       <Tabs.Screen name="profile" options={{ title: t("profile"), tabBarIcon: createTabIcon(Settings) }} />
+      <Tabs.Screen name="workout/[assignedWorkoutId]" options={{ href: null }} />
     </Tabs>
   );
 }

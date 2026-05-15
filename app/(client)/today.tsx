@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +14,7 @@ import { colors, spacing, typography } from "@/theme";
 
 export default function ClientTodayScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const assignedWorkoutsQuery = useQuery({
     queryKey: ["clientAssignedWorkouts"],
@@ -53,6 +55,7 @@ export default function ClientTodayScreen() {
               ) : null}
               <Text style={styles.meta}>{workout.scheduled_date}</Text>
               <Text style={styles.status}>{workout.status}</Text>
+              <Button label={t("logWorkout")} onPress={() => router.push(`/(client)/workout/${workout.id}`)} />
               {workout.status === "assigned" ? (
                 <Button
                   label={t("startWorkout")}

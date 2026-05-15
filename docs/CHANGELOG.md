@@ -30,6 +30,7 @@
 - Added coach workout template edit, duplicate, and delete actions.
 - Added assigned workout migration, assignment service/schema/tests, coach assignment flow, and client assigned-workout list on Today.
 - Added workout log migration/service and client start/complete workout actions with coach-visible assignment status.
+- Added client workout detail screen with set-level actual reps and weight logging.
 - Local demo user seed script for one coach and one connected client.
 
 ### Notes

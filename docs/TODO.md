@@ -82,10 +82,10 @@
 # Phase 7 — Workout Logging
 
 - [x] Today workout screen
-- [ ] Workout detail screen
-- [ ] Set logging
-- [ ] Actual reps input
-- [ ] Actual weight input
+- [x] Workout detail screen
+- [x] Set logging
+- [x] Actual reps input
+- [x] Actual weight input
 - [x] Complete workout
 - [x] Coach can view completed workout
 
