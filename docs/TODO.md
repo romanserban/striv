@@ -48,7 +48,7 @@
 - [x] Add client_profiles table
 - [x] Add exercises table
 - [x] Add workout tables
-- [ ] Add progress tables
+- [x] Add progress tables
 - [ ] Add chat tables
 - [ ] Add scheduled_sessions table
 - [x] Add RLS policies
@@ -93,11 +93,11 @@
 
 # Phase 8 — Progress Tracking
 
-- [ ] Progress entry form
-- [ ] Weight logging
-- [ ] Measurement logging
-- [ ] Energy level
-- [ ] Notes
+- [x] Progress entry form
+- [x] Weight logging
+- [x] Measurement logging
+- [x] Energy level
+- [x] Notes
 - [ ] Progress photo upload
 - [ ] Image compression
 - [ ] Progress chart

@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, and has client workout start/complete plus set-level workout logging.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging/progress database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, has client workout start/complete plus set-level workout logging, and includes basic client progress tracking.
 
 ---
 
@@ -34,7 +34,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Workout builder
 - [x] Workout assignment
 - [x] Workout logging
-- [ ] Progress tracking
+- [x] Progress tracking
 - [ ] Progress photos
 - [ ] Chat
 - [ ] Calendar
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Set-level workout logging completed on 2026-05-15.
+Basic client progress tracking completed on 2026-05-15.
 
 ---
 
@@ -100,6 +100,8 @@ Set-level workout logging completed on 2026-05-15.
 - Client Today tab links into an assigned workout detail/logging screen.
 - Client workout detail supports entering actual reps and actual weight per set and saving each set.
 - Coach Clients tab shows assigned workout status.
+- `supabase/migrations/202605150008_create_progress_entries.sql` creates progress entries and RLS for clients/coaches.
+- Client Progress tab supports logging weight, measurements, energy level, notes, and viewing history.
 
 ---
 
@@ -114,7 +116,7 @@ Set-level workout logging completed on 2026-05-15.
 
 # Next Recommended Task
 
-Implement basic client progress tracking tables and a progress entry form.
+Add progress photos storage/table foundation and upload flow.
 
 ---
 
@@ -173,6 +175,10 @@ Implement basic client progress tracking tables and a progress entry form.
 - services/workoutLogs.ts
 - types/workoutLog.ts
 - app/(client)/workout/[assignedWorkoutId].tsx
+- supabase/migrations/202605150008_create_progress_entries.sql
+- services/progress.ts
+- features/progress/progressSchemas.ts
+- types/progress.ts
 
 ---
 
