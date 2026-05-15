@@ -34,6 +34,14 @@
   "joinCoach": "Alatura-te antrenorului",
   "noCoachAssigned": "Nu ai un antrenor asignat inca.",
   "noClients": "Nu exista clienti conectati inca.",
+  "exerciseName": "Nume exercitiu",
+  "muscleGroup": "Grupa musculara",
+  "equipment": "Echipament",
+  "instructions": "Instructiuni",
+  "mediaUrl": "URL media",
+  "createExercise": "Creeaza exercitiu",
+  "exerciseSaved": "Exercitiu salvat.",
+  "noExercises": "Nu exista exercitii inca.",
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -53,7 +61,10 @@
     "goalMin": "Introdu un obiectiv.",
     "trainingLevelMin": "Introdu nivelul de antrenament.",
     "number": "Introdu un numar valid.",
-    "inviteCodeMin": "Introdu un cod de invitatie valid."
+    "inviteCodeMin": "Introdu un cod de invitatie valid.",
+    "exerciseNameMin": "Introdu numele exercitiului.",
+    "muscleGroupMin": "Introdu grupa musculara.",
+    "url": "Introdu un URL valid."
   },
   "errors": {
     "generic": "Ceva nu a mers bine. Incearca din nou."

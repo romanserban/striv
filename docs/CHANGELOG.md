@@ -23,6 +23,8 @@
 - Invite-code RPC migration for client coach connection, assigned coach lookup, and assigned client list.
 - Client invite-code join form and assigned coach display.
 - Coach connected-client list.
+- Exercise table migration with RLS for global and coach-owned custom exercises.
+- Exercise service, validation schema, schema tests, and basic coach exercise list/create UI.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.

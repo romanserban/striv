@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile database migrations, includes coach/client profile editing screens, and supports invite-code coach/client connections.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, and has a basic coach exercise library.
 
 ---
 
@@ -30,7 +30,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Coach profile
 - [x] Client profile
 - [x] Invite code system
-- [ ] Exercise library
+- [x] Exercise library
 - [ ] Workout builder
 - [ ] Workout assignment
 - [ ] Workout logging
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Invite-code coach/client connection completed on 2026-05-15.
+Exercise library foundation completed on 2026-05-15.
 
 ---
 
@@ -86,6 +86,8 @@ Invite-code coach/client connection completed on 2026-05-15.
 - `supabase/migrations/202605150002_invite_connections.sql` adds RPCs for joining a coach, reading the assigned coach, and reading assigned clients.
 - Client profile includes invite-code join and assigned coach display.
 - Coach clients screen lists connected clients.
+- `supabase/migrations/202605150003_create_exercises.sql` creates the exercises table and RLS for global and coach custom exercises.
+- Coach Workouts tab currently hosts the basic exercise library list/create flow; workout builder is not implemented yet.
 
 ---
 
@@ -100,7 +102,7 @@ Invite-code coach/client connection completed on 2026-05-15.
 
 # Next Recommended Task
 
-Start the exercise library foundation: database migration for exercises, service functions, and a coach exercise list placeholder.
+Start workout builder foundation: workout template tables, services, and basic coach template creation.
 
 ---
 
@@ -142,6 +144,10 @@ Start the exercise library foundation: database migration for exercises, service
 - features/settings/profileSchemas.ts
 - types/roleProfiles.ts
 - supabase/migrations/202605150002_invite_connections.sql
+- supabase/migrations/202605150003_create_exercises.sql
+- services/exercises.ts
+- features/workouts/exerciseSchemas.ts
+- types/exercise.ts
 
 ---
 

@@ -34,6 +34,14 @@
   "joinCoach": "Join coach",
   "noCoachAssigned": "No coach assigned yet.",
   "noClients": "No clients connected yet.",
+  "exerciseName": "Exercise name",
+  "muscleGroup": "Muscle group",
+  "equipment": "Equipment",
+  "instructions": "Instructions",
+  "mediaUrl": "Media URL",
+  "createExercise": "Create exercise",
+  "exerciseSaved": "Exercise saved.",
+  "noExercises": "No exercises yet.",
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -53,7 +61,10 @@
     "goalMin": "Enter a goal.",
     "trainingLevelMin": "Enter a training level.",
     "number": "Enter a valid number.",
-    "inviteCodeMin": "Enter a valid invite code."
+    "inviteCodeMin": "Enter a valid invite code.",
+    "exerciseNameMin": "Enter an exercise name.",
+    "muscleGroupMin": "Enter a muscle group.",
+    "url": "Enter a valid URL."
   },
   "errors": {
     "generic": "Something went wrong. Try again."

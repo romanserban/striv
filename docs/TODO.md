@@ -46,7 +46,7 @@
 - [x] Add profiles table
 - [x] Add coach_profiles table
 - [x] Add client_profiles table
-- [ ] Add exercises table
+- [x] Add exercises table
 - [ ] Add workout tables
 - [ ] Add progress tables
 - [ ] Add chat tables
@@ -59,10 +59,10 @@
 
 # Phase 5 — Exercise Library
 
-- [ ] Exercise list
+- [x] Exercise list
 - [ ] Search exercises
 - [ ] Filter exercises
-- [ ] Create custom exercise
+- [x] Create custom exercise
 - [ ] Edit custom exercise
 
 ---
