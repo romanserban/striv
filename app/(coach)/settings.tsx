@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
+import { NotificationPermissionCard } from "@/components/notifications/NotificationPermissionCard";
 import { coachProfileSchema, type CoachProfileFormValues } from "@/features/settings/profileSchemas";
 import { authService } from "@/services/auth";
 import { profilesService } from "@/services/profiles";
@@ -81,6 +82,7 @@ export default function CoachSettingsScreen() {
 
   return (
     <PlaceholderScreen titleKey="settings">
+      <NotificationPermissionCard userId={userId} />
       <Card>
         {coachProfileQuery.isLoading ? (
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />

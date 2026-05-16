@@ -4,7 +4,7 @@
 Striv
 
 ## Current Status
-Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging/progress database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, has client workout start/complete plus set-level workout logging, and includes basic client progress tracking with progress photo upload.
+Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK 54 for Expo Go compatibility, includes the first Supabase Auth flow implementation, has auth/profile/exercise/workout/assignment/logging/progress database migrations, includes coach/client profile editing screens, supports invite-code coach/client connections, has a basic coach exercise library, supports workout templates with exercises, supports assigning workouts to clients, has client workout start/complete plus set-level workout logging, includes basic client progress tracking with progress photo upload, and has push notification registration groundwork.
 
 ---
 
@@ -38,7 +38,7 @@ Expo React Native TypeScript foundation has been scaffolded, aligned to Expo SDK
 - [x] Progress photos
 - [x] Chat
 - [x] Calendar
-- [ ] Notifications
+- [x] Notifications
 - [ ] Settings
 - [x] i18n
 - [x] Testing setup
@@ -53,7 +53,7 @@ main
 
 # Last Completed Work
 
-Calendar foundation completed on 2026-05-15.
+Final QA completed on 2026-05-16.
 
 ---
 
@@ -110,6 +110,18 @@ Calendar foundation completed on 2026-05-15.
 - `supabase/migrations/202605150011_create_scheduled_sessions.sql` creates scheduled coaching sessions with RLS for coaches and clients.
 - Coach Calendar tab supports creating sessions for connected clients, rescheduling sessions, cancelling sessions, and viewing assigned workouts.
 - Client Calendar tab supports viewing scheduled coaching sessions and assigned workouts.
+- `supabase/migrations/202605150012_create_notifications.sql` creates push token storage and a notification event queue with RLS.
+- Coach Settings and Client Profile include a push notification permission/token registration card.
+- `services/notifications.ts` registers Expo push tokens, saves device tokens, and prepares payloads for workout assigned, message, and session reminder notifications.
+- Push notification server dispatch is not implemented yet; notification events are prepared for future Edge Function/service-role processing.
+- `components/ui/ErrorState.tsx` provides a reusable retryable query-error state.
+- High-traffic client/coach screens now show query error states with retry actions and disable context-dependent mutations until required data is loaded.
+- Date/time validation now rejects impossible dates and out-of-range times.
+- Workout form inputs now expose all schema-backed fields, including exercise media URL, tempo, and notes.
+- Locale parity is covered by `__tests__/localeParity.test.ts`.
+- `components/ui/StatusBadge.tsx` provides consistent translated status display for workout and session states.
+- Security review checked for committed secrets, direct UI Supabase calls, and service-role exposure. `.env.example` now labels the service-role key as local-script-only.
+- Final QA passed `npm run typecheck`, `npm test -- --runInBand`, `npm run lint`, and `EXPO_DOCTOR_ENABLE_DIRECTORY_CHECK=0 npx expo-doctor`.
 
 ---
 
@@ -121,12 +133,13 @@ Calendar foundation completed on 2026-05-15.
 - The full auth flow has not been manually tested against a real Supabase project in this session.
 - Chat requires applying `supabase/migrations/202605150010_create_chat.sql`; realtime behavior still needs manual testing against a real Supabase project.
 - Calendar requires applying `supabase/migrations/202605150011_create_scheduled_sessions.sql`; session flows still need manual testing against a real Supabase project.
+- Notifications require applying `supabase/migrations/202605150012_create_notifications.sql`; Expo push token registration requires a physical device and an EAS project ID.
 
 ---
 
 # Next Recommended Task
 
-Start notifications foundation: notification permission, push token storage, and notification service preparation.
+Continue with the remaining non-polish backlog: global exercise seeding, exercise search/filter/edit, image compression, progress chart, coach progress view, and eventual server-side notification delivery.
 
 ---
 
@@ -206,6 +219,18 @@ Start notifications foundation: notification permission, push token storage, and
 - app/(coach)/calendar.tsx
 - app/(client)/calendar.tsx
 - __tests__/sessionSchemas.test.ts
+- supabase/migrations/202605150012_create_notifications.sql
+- services/notifications.ts
+- hooks/usePushNotifications.ts
+- types/notification.ts
+- components/notifications/NotificationPermissionCard.tsx
+- __tests__/notifications.test.ts
+- components/ui/ErrorState.tsx
+- __tests__/ErrorState.test.tsx
+- utils/dateValidation.ts
+- __tests__/localeParity.test.ts
+- components/ui/StatusBadge.tsx
+- __tests__/StatusBadge.test.tsx
 
 ---
 

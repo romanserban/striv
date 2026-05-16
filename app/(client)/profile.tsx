@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
+import { NotificationPermissionCard } from "@/components/notifications/NotificationPermissionCard";
 import {
   clientProfileSchema,
   inviteCodeSchema,
@@ -124,6 +125,7 @@ export default function ClientProfileScreen() {
 
   return (
     <PlaceholderScreen titleKey="profile">
+      <NotificationPermissionCard userId={userId} />
       <Card>
         {clientProfileQuery.isLoading ? (
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />

@@ -24,6 +24,7 @@
   "save": "Save",
   "back": "Back",
   "open": "Open",
+  "retry": "Retry",
   "bio": "Bio",
   "specialty": "Specialty",
   "inviteCode": "Invite code",
@@ -122,6 +123,30 @@
   "actualWeight": "Actual weight",
   "saveSet": "Save set",
   "setSaved": "Saved",
+  "status": {
+    "assigned": "Assigned",
+    "in_progress": "In progress",
+    "completed": "Completed",
+    "missed": "Missed",
+    "scheduled": "Scheduled",
+    "cancelled": "Cancelled"
+  },
+  "notifications": {
+    "title": "Push notifications",
+    "body": "Enable reminders for assigned workouts, messages, and coaching sessions.",
+    "enable": "Enable notifications",
+    "refreshToken": "Refresh device token",
+    "enabled": "Enabled",
+    "deviceRegistered": "Registered on {{platform}}.",
+    "deviceUnavailable": "Push notifications require a physical device.",
+    "missingProjectId": "Add an EAS project ID before requesting an Expo push token.",
+    "status": {
+      "granted": "Permission granted",
+      "denied": "Permission denied",
+      "undetermined": "Permission not requested",
+      "provisional": "Permission provisional"
+    }
+  },
   "auth": {
     "welcomeTitle": "Build stronger coaching habits.",
     "welcomeBody": "A focused workspace for coaches and clients.",
@@ -156,7 +181,8 @@
     "url": "Enter a valid URL."
   },
   "errors": {
-    "generic": "Something went wrong. Try again."
+    "generic": "Something went wrong. Try again.",
+    "title": "Could not load this section."
   },
   "placeholder": {
     "screenBody": "This foundation screen is ready for the next MVP step.",

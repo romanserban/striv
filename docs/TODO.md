@@ -129,12 +129,12 @@
 
 # Phase 11 — Notifications
 
-- [ ] Request notification permission
-- [ ] Save push token
-- [ ] Prepare notification service
-- [ ] Workout assigned notification type
-- [ ] Message notification type
-- [ ] Session reminder type
+- [x] Request notification permission
+- [x] Save push token
+- [x] Prepare notification service
+- [x] Workout assigned notification type
+- [x] Message notification type
+- [x] Session reminder type
 
 ---
 
@@ -143,7 +143,7 @@
 - [x] Add Jest
 - [x] Add React Native Testing Library
 - [x] Add jest-native
-- [ ] Add utility tests
+- [x] Add utility tests
 - [x] Add validation schema tests
 - [x] Add reusable component tests
 
@@ -151,11 +151,11 @@
 
 # Phase 13 — Polish
 
-- [ ] Loading states
-- [ ] Empty states
-- [ ] Error states
-- [ ] Form validation messages
-- [ ] Translation review
-- [ ] UI consistency review
-- [ ] Security review
-- [ ] Final QA
+- [x] Loading states
+- [x] Empty states
+- [x] Error states
+- [x] Form validation messages
+- [x] Translation review
+- [x] UI consistency review
+- [x] Security review
+- [x] Final QA

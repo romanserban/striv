@@ -38,12 +38,25 @@
 - Added message service, chat validation schema/test, reusable message bubble, shared chat thread UI, and coach/client chat screens.
 - Added scheduled session migration with RLS, calendar service, session validation schema/test, and coach/client calendar screens.
 - Added coach session create, reschedule, cancel flows plus calendar views for sessions and assigned workouts.
+- Added notification migration for push tokens and notification events with RLS.
+- Added Expo push notification permission/token service, reusable registration card, and notification payload builders for workout assignments, messages, and session reminders.
+- Added notification utility tests.
+- Added reusable retryable error state and applied query error handling across Today, Clients, Workouts, Progress, Chat, and Calendar screens.
+- Added guards that disable context-dependent actions until required profile/client/template data is loaded.
+- Added ErrorState component tests.
+- Tightened date/time validation for workout assignments and scheduled sessions.
+- Exposed missing workout form fields for media URL, tempo, and notes.
+- Added locale parity test for English and Romanian translation keys.
+- Added translated status labels and a reusable StatusBadge for workout and session states.
+- Clarified `.env.example` so the Supabase service-role key is marked local-script-only.
+- Aligned Expo notification dependencies with Expo SDK 54 and completed final automated QA.
 
 ### Notes
 - Supabase environment variables are documented in `.env.example` only.
 - npm audit currently reports dependency vulnerabilities from installed packages.
 - Auth profile creation requires the `profiles` table and RLS policies to be applied in Supabase.
 - Apply all migrations in `supabase/migrations` before manually testing real signup/login/profile/invite flows.
+- Push token registration requires a physical device and an EAS project ID; notification event delivery is prepared for future server-side dispatch.
 
 ### Fixed
 - Downgraded the project from Expo SDK 55 to SDK 54 so it can run with the App Store Expo Go app.

@@ -8,9 +8,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import {
   scheduledSessionSchema,
   toSessionDateTime,
@@ -127,6 +129,15 @@ export default function CoachCalendarScreen() {
               t("selectClient")}
           </Text>
           <View style={styles.buttonList}>
+            {clientsQuery.isLoading ? <LoadingSkeleton count={2} accessibilityLabel={t("placeholder.loading")} /> : null}
+            {clientsQuery.isError ? (
+              <ErrorState
+                title={t("errors.title")}
+                message={clientsQuery.error.message}
+                retryLabel={t("retry")}
+                onRetry={() => clientsQuery.refetch()}
+              />
+            ) : null}
             {clientsQuery.data?.map((client) => (
               <Button
                 key={client.client_profile_id}
@@ -223,6 +234,7 @@ export default function CoachCalendarScreen() {
           {saveSessionMutation.isSuccess ? <Text style={styles.success}>{t("sessionSaved")}</Text> : null}
           <Button
             label={editingSession ? t("save") : t("createSession")}
+            disabled={!selectedClientId || !coachProfileQuery.data?.id}
             loading={saveSessionMutation.isPending}
             onPress={handleSubmit(onSubmit)}
           />
@@ -242,7 +254,15 @@ export default function CoachCalendarScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("scheduledSessions")}</Text>
           {sessionsQuery.isLoading ? <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} /> : null}
-          {!sessionsQuery.isLoading && !sessionsQuery.data?.length ? (
+          {sessionsQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={sessionsQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => sessionsQuery.refetch()}
+            />
+          ) : null}
+          {!sessionsQuery.isLoading && !sessionsQuery.isError && !sessionsQuery.data?.length ? (
             <EmptyState title={t("noScheduledSessions")} body={t("placeholder.emptyBody")} />
           ) : null}
           {sessionsQuery.data?.map((scheduledSession) => (
@@ -251,7 +271,7 @@ export default function CoachCalendarScreen() {
               <Text style={styles.meta}>{scheduledSession.client_profiles?.profiles?.full_name ?? t("client")}</Text>
               <Text style={styles.meta}>{formatSessionWindow(scheduledSession.start_time, scheduledSession.end_time)}</Text>
               {scheduledSession.location ? <Text style={styles.meta}>{scheduledSession.location}</Text> : null}
-              <Text style={styles.status}>{scheduledSession.status}</Text>
+              <StatusBadge status={scheduledSession.status} />
               <View style={styles.actions}>
                 <Button label={t("reschedule")} onPress={() => setEditingSession(scheduledSession)} variant="secondary" />
                 {scheduledSession.status !== "cancelled" ? (
@@ -273,7 +293,15 @@ export default function CoachCalendarScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("scheduledWorkouts")}</Text>
           {assignedWorkoutsQuery.isLoading ? <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} /> : null}
-          {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.data?.length ? (
+          {assignedWorkoutsQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={assignedWorkoutsQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => assignedWorkoutsQuery.refetch()}
+            />
+          ) : null}
+          {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.isError && !assignedWorkoutsQuery.data?.length ? (
             <EmptyState title={t("noAssignedWorkouts")} body={t("placeholder.emptyBody")} />
           ) : null}
           {assignedWorkoutsQuery.data?.map((workout) => (
@@ -281,7 +309,7 @@ export default function CoachCalendarScreen() {
               <Text style={styles.name}>{workout.workout_templates?.name ?? t("workouts")}</Text>
               <Text style={styles.meta}>{workout.client_profiles?.profiles?.full_name ?? t("client")}</Text>
               <Text style={styles.meta}>{workout.scheduled_date}</Text>
-              <Text style={styles.status}>{workout.status}</Text>
+              <StatusBadge status={workout.status} />
             </View>
           ))}
         </View>
@@ -358,12 +386,6 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     fontSize: typography.size.sm,
     lineHeight: typography.lineHeight.sm
-  },
-  status: {
-    color: colors.primary,
-    fontSize: typography.size.sm,
-    lineHeight: typography.lineHeight.sm,
-    fontWeight: typography.weight.semibold
   },
   error: {
     color: colors.error,

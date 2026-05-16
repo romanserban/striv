@@ -6,8 +6,10 @@ import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { assignmentsService } from "@/services/assignments";
 import { workoutLogsService } from "@/services/workoutLogs";
 import { colors, spacing, typography } from "@/theme";
@@ -40,7 +42,17 @@ export default function ClientTodayScreen() {
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
         </Card>
       ) : null}
-      {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.data?.length ? (
+      {assignedWorkoutsQuery.isError ? (
+        <Card>
+          <ErrorState
+            title={t("errors.title")}
+            message={assignedWorkoutsQuery.error.message}
+            retryLabel={t("retry")}
+            onRetry={() => assignedWorkoutsQuery.refetch()}
+          />
+        </Card>
+      ) : null}
+      {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.isError && !assignedWorkoutsQuery.data?.length ? (
         <Card>
           <EmptyState title={t("noAssignedWorkouts")} body={t("placeholder.emptyBody")} />
         </Card>
@@ -54,7 +66,11 @@ export default function ClientTodayScreen() {
                 <Text style={styles.meta}>{workout.workout_templates.description}</Text>
               ) : null}
               <Text style={styles.meta}>{workout.scheduled_date}</Text>
-              <Text style={styles.status}>{workout.status}</Text>
+              <StatusBadge status={workout.status} />
+              {startWorkoutMutation.error ? <Text style={styles.error}>{startWorkoutMutation.error.message}</Text> : null}
+              {completeWorkoutMutation.error ? (
+                <Text style={styles.error}>{completeWorkoutMutation.error.message}</Text>
+              ) : null}
               <Button label={t("logWorkout")} onPress={() => router.push(`/(client)/workout/${workout.id}`)} />
               {workout.status === "assigned" ? (
                 <Button
@@ -97,10 +113,9 @@ const styles = StyleSheet.create({
     fontSize: typography.size.md,
     lineHeight: typography.lineHeight.md
   },
-  status: {
-    color: colors.primary,
+  error: {
+    color: colors.error,
     fontSize: typography.size.sm,
-    lineHeight: typography.lineHeight.sm,
-    fontWeight: typography.weight.semibold
+    lineHeight: typography.lineHeight.sm
   }
 });

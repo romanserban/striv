@@ -8,6 +8,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
@@ -214,7 +215,20 @@ export default function ClientProgressScreen() {
           />
           {saveProgressMutation.error ? <Text style={styles.error}>{saveProgressMutation.error.message}</Text> : null}
           {saveProgressMutation.isSuccess ? <Text style={styles.success}>{t("progressSaved")}</Text> : null}
-          <Button label={t("saveProgress")} loading={saveProgressMutation.isPending} onPress={handleSubmit(onSubmit)} />
+          {clientProfileQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={clientProfileQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => clientProfileQuery.refetch()}
+            />
+          ) : null}
+          <Button
+            label={t("saveProgress")}
+            disabled={!clientProfileQuery.data?.id}
+            loading={saveProgressMutation.isPending}
+            onPress={handleSubmit(onSubmit)}
+          />
         </View>
       </Card>
       <Card>
@@ -224,6 +238,7 @@ export default function ClientProgressScreen() {
           {uploadPhotoMutation.isSuccess ? <Text style={styles.success}>{t("photoUploaded")}</Text> : null}
           <Button
             label={t("uploadPhoto")}
+            disabled={!clientProfileQuery.data?.id}
             loading={uploadPhotoMutation.isPending}
             onPress={() => uploadPhotoMutation.mutate()}
           />
@@ -234,7 +249,17 @@ export default function ClientProgressScreen() {
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
         </Card>
       ) : null}
-      {!progressPhotosQuery.isLoading && !progressPhotosQuery.data?.length ? (
+      {progressPhotosQuery.isError ? (
+        <Card>
+          <ErrorState
+            title={t("errors.title")}
+            message={progressPhotosQuery.error.message}
+            retryLabel={t("retry")}
+            onRetry={() => progressPhotosQuery.refetch()}
+          />
+        </Card>
+      ) : null}
+      {!progressPhotosQuery.isLoading && !progressPhotosQuery.isError && !progressPhotosQuery.data?.length ? (
         <Card>
           <EmptyState title={t("noProgressPhotos")} body={t("placeholder.emptyBody")} />
         </Card>
@@ -254,7 +279,17 @@ export default function ClientProgressScreen() {
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
         </Card>
       ) : null}
-      {!progressEntriesQuery.isLoading && !progressEntriesQuery.data?.length ? (
+      {progressEntriesQuery.isError ? (
+        <Card>
+          <ErrorState
+            title={t("errors.title")}
+            message={progressEntriesQuery.error.message}
+            retryLabel={t("retry")}
+            onRetry={() => progressEntriesQuery.refetch()}
+          />
+        </Card>
+      ) : null}
+      {!progressEntriesQuery.isLoading && !progressEntriesQuery.isError && !progressEntriesQuery.data?.length ? (
         <Card>
           <EmptyState title={t("noProgressEntries")} body={t("placeholder.emptyBody")} />
         </Card>

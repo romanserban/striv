@@ -26,6 +26,26 @@ describe("scheduled session schema", () => {
     expect(result.success).toBe(false);
   });
 
+  it("rejects impossible dates and times", () => {
+    expect(
+      scheduledSessionSchema.safeParse({
+        title: "Check-in",
+        scheduledDate: "2026-13-15",
+        startTime: "09:00",
+        endTime: "09:30"
+      }).success
+    ).toBe(false);
+
+    expect(
+      scheduledSessionSchema.safeParse({
+        title: "Check-in",
+        scheduledDate: "2026-05-15",
+        startTime: "24:00",
+        endTime: "25:30"
+      }).success
+    ).toBe(false);
+  });
+
   it("combines date and time into an ISO string", () => {
     expect(toSessionDateTime("2026-05-15", "09:00")).toContain("T");
   });

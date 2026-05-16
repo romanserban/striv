@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
 import { ChatThread } from "@/features/chat/ChatThread";
@@ -63,7 +64,31 @@ export default function ClientChatScreen() {
             {clientProfileQuery.isLoading || assignedCoachQuery.isLoading || conversationsQuery.isLoading ? (
               <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
             ) : null}
-            {!assignedCoachQuery.isLoading && !assignedCoachQuery.data ? (
+            {clientProfileQuery.isError ? (
+              <ErrorState
+                title={t("errors.title")}
+                message={clientProfileQuery.error.message}
+                retryLabel={t("retry")}
+                onRetry={() => clientProfileQuery.refetch()}
+              />
+            ) : null}
+            {assignedCoachQuery.isError ? (
+              <ErrorState
+                title={t("errors.title")}
+                message={assignedCoachQuery.error.message}
+                retryLabel={t("retry")}
+                onRetry={() => assignedCoachQuery.refetch()}
+              />
+            ) : null}
+            {conversationsQuery.isError ? (
+              <ErrorState
+                title={t("errors.title")}
+                message={conversationsQuery.error.message}
+                retryLabel={t("retry")}
+                onRetry={() => conversationsQuery.refetch()}
+              />
+            ) : null}
+            {!assignedCoachQuery.isLoading && !assignedCoachQuery.isError && !assignedCoachQuery.data ? (
               <EmptyState title={t("noCoachAssigned")} body={t("placeholder.emptyBody")} />
             ) : null}
             {assignedCoachQuery.data ? (

@@ -8,6 +8,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
@@ -274,6 +275,7 @@ export default function CoachWorkoutsScreen() {
           {updateWorkoutMutation.isSuccess ? <Text style={styles.success}>{t("workoutUpdated")}</Text> : null}
           <Button
             label={editingWorkoutTemplateId ? t("save") : t("createWorkout")}
+            disabled={!coachProfileQuery.data?.id}
             loading={createWorkoutMutation.isPending || updateWorkoutMutation.isPending}
             onPress={handleWorkoutSubmit(onWorkoutSubmit)}
           />
@@ -287,7 +289,17 @@ export default function CoachWorkoutsScreen() {
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
         </Card>
       ) : null}
-      {!workoutTemplatesQuery.isLoading && !workoutTemplatesQuery.data?.length ? (
+      {workoutTemplatesQuery.isError ? (
+        <Card>
+          <ErrorState
+            title={t("errors.title")}
+            message={workoutTemplatesQuery.error.message}
+            retryLabel={t("retry")}
+            onRetry={() => workoutTemplatesQuery.refetch()}
+          />
+        </Card>
+      ) : null}
+      {!workoutTemplatesQuery.isLoading && !workoutTemplatesQuery.isError && !workoutTemplatesQuery.data?.length ? (
         <Card>
           <EmptyState title={t("noWorkoutTemplates")} body={t("placeholder.emptyBody")} />
         </Card>
@@ -330,6 +342,9 @@ export default function CoachWorkoutsScreen() {
                     </Text>
                   </View>
                 ))}
+              {workoutTemplateExercisesQuery.isError ? (
+                <Text style={styles.error}>{workoutTemplateExercisesQuery.error.message}</Text>
+              ) : null}
             </View>
           </Card>
         ))}
@@ -396,6 +411,20 @@ export default function CoachWorkoutsScreen() {
               />
             )}
           />
+          <Controller
+            control={workoutExerciseControl}
+            name="tempo"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input label={t("tempo")} onBlur={onBlur} onChangeText={onChange} value={value} />
+            )}
+          />
+          <Controller
+            control={workoutExerciseControl}
+            name="notes"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input label={t("notes")} multiline onBlur={onBlur} onChangeText={onChange} value={value} />
+            )}
+          />
           {addExerciseMutation.error ? <Text style={styles.error}>{addExerciseMutation.error.message}</Text> : null}
           {addExerciseMutation.isSuccess ? <Text style={styles.success}>{t("exerciseAdded")}</Text> : null}
         </View>
@@ -443,12 +472,28 @@ export default function CoachWorkoutsScreen() {
               <Input label={t("instructions")} multiline onBlur={onBlur} onChangeText={onChange} value={value} />
             )}
           />
+          <Controller
+            control={control}
+            name="mediaUrl"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                label={t("mediaUrl")}
+                autoCapitalize="none"
+                keyboardType="url"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                error={errors.mediaUrl?.message ? t(errors.mediaUrl.message) : undefined}
+              />
+            )}
+          />
           {createExerciseMutation.error ? (
             <Text style={styles.error}>{createExerciseMutation.error.message}</Text>
           ) : null}
           {createExerciseMutation.isSuccess ? <Text style={styles.success}>{t("exerciseSaved")}</Text> : null}
           <Button
             label={t("createExercise")}
+            disabled={!coachProfileQuery.data?.id}
             loading={createExerciseMutation.isPending}
             onPress={handleSubmit(onSubmit)}
           />
@@ -459,7 +504,17 @@ export default function CoachWorkoutsScreen() {
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
         </Card>
       ) : null}
-      {!exercisesQuery.isLoading && !exercisesQuery.data?.length ? (
+      {exercisesQuery.isError ? (
+        <Card>
+          <ErrorState
+            title={t("errors.title")}
+            message={exercisesQuery.error.message}
+            retryLabel={t("retry")}
+            onRetry={() => exercisesQuery.refetch()}
+          />
+        </Card>
+      ) : null}
+      {!exercisesQuery.isLoading && !exercisesQuery.isError && !exercisesQuery.data?.length ? (
         <Card>
           <EmptyState title={t("noExercises")} body={t("placeholder.emptyBody")} />
         </Card>
@@ -473,6 +528,7 @@ export default function CoachWorkoutsScreen() {
               {exercise.equipment ? <Text style={styles.meta}>{exercise.equipment}</Text> : null}
               <Button
                 label={t("addToWorkout")}
+                disabled={!selectedWorkoutTemplateId}
                 loading={addExerciseMutation.isPending}
                 onPress={() => addExerciseToSelectedWorkout(exercise.id)}
                 variant="secondary"

@@ -24,6 +24,7 @@
   "save": "Salveaza",
   "back": "Inapoi",
   "open": "Deschide",
+  "retry": "Reincearca",
   "bio": "Bio",
   "specialty": "Specializare",
   "inviteCode": "Cod de invitatie",
@@ -122,6 +123,30 @@
   "actualWeight": "Greutate realizata",
   "saveSet": "Salveaza setul",
   "setSaved": "Salvat",
+  "status": {
+    "assigned": "Asignat",
+    "in_progress": "In progres",
+    "completed": "Finalizat",
+    "missed": "Ratata",
+    "scheduled": "Programata",
+    "cancelled": "Anulata"
+  },
+  "notifications": {
+    "title": "Notificari push",
+    "body": "Activeaza mementouri pentru antrenamente asignate, mesaje si sesiuni de coaching.",
+    "enable": "Activeaza notificari",
+    "refreshToken": "Reimprospateaza tokenul",
+    "enabled": "Activat",
+    "deviceRegistered": "Inregistrat pe {{platform}}.",
+    "deviceUnavailable": "Notificarile push necesita un dispozitiv fizic.",
+    "missingProjectId": "Adauga un ID de proiect EAS inainte de a cere un token push Expo.",
+    "status": {
+      "granted": "Permisiune acordata",
+      "denied": "Permisiune refuzata",
+      "undetermined": "Permisiune nesolicitata",
+      "provisional": "Permisiune provizorie"
+    }
+  },
   "auth": {
     "welcomeTitle": "Construieste obiceiuri mai bune de coaching.",
     "welcomeBody": "Un spatiu concentrat pentru antrenori si clienti.",
@@ -156,7 +181,8 @@
     "url": "Introdu un URL valid."
   },
   "errors": {
-    "generic": "Ceva nu a mers bine. Incearca din nou."
+    "generic": "Ceva nu a mers bine. Incearca din nou.",
+    "title": "Aceasta sectiune nu a putut fi incarcata."
   },
   "placeholder": {
     "screenBody": "Acest ecran de baza este pregatit pentru urmatorul pas MVP.",

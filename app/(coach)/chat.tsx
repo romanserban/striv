@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
 import { ChatThread } from "@/features/chat/ChatThread";
@@ -64,7 +65,15 @@ export default function CoachChatScreen() {
               {conversationsQuery.isLoading ? (
                 <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
               ) : null}
-              {!conversationsQuery.isLoading && !conversationsQuery.data?.length ? (
+              {conversationsQuery.isError ? (
+                <ErrorState
+                  title={t("errors.title")}
+                  message={conversationsQuery.error.message}
+                  retryLabel={t("retry")}
+                  onRetry={() => conversationsQuery.refetch()}
+                />
+              ) : null}
+              {!conversationsQuery.isLoading && !conversationsQuery.isError && !conversationsQuery.data?.length ? (
                 <EmptyState title={t("noConversations")} body={t("placeholder.emptyBody")} />
               ) : null}
               {conversationsQuery.data?.map((conversation) => (
@@ -88,7 +97,15 @@ export default function CoachChatScreen() {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>{t("startConversation")}</Text>
               {clientsQuery.isLoading ? <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} /> : null}
-              {!clientsQuery.isLoading && !clientsQuery.data?.length ? (
+              {clientsQuery.isError ? (
+                <ErrorState
+                  title={t("errors.title")}
+                  message={clientsQuery.error.message}
+                  retryLabel={t("retry")}
+                  onRetry={() => clientsQuery.refetch()}
+                />
+              ) : null}
+              {!clientsQuery.isLoading && !clientsQuery.isError && !clientsQuery.data?.length ? (
                 <EmptyState title={t("noClients")} body={t("placeholder.emptyBody")} />
               ) : null}
               {clientsQuery.data?.map((client) => (

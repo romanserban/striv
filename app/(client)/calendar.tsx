@@ -4,8 +4,10 @@ import { useTranslation } from "react-i18next";
 
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { assignmentsService } from "@/services/assignments";
 import { calendarService } from "@/services/calendar";
 import { colors, spacing, typography } from "@/theme";
@@ -27,7 +29,15 @@ export default function ClientCalendarScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("scheduledSessions")}</Text>
           {sessionsQuery.isLoading ? <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} /> : null}
-          {!sessionsQuery.isLoading && !sessionsQuery.data?.length ? (
+          {sessionsQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={sessionsQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => sessionsQuery.refetch()}
+            />
+          ) : null}
+          {!sessionsQuery.isLoading && !sessionsQuery.isError && !sessionsQuery.data?.length ? (
             <EmptyState title={t("noScheduledSessions")} body={t("placeholder.emptyBody")} />
           ) : null}
           {sessionsQuery.data?.map((scheduledSession) => (
@@ -36,7 +46,7 @@ export default function ClientCalendarScreen() {
               <Text style={styles.meta}>{scheduledSession.coach_profiles?.profiles?.full_name ?? t("coach")}</Text>
               <Text style={styles.meta}>{formatSessionWindow(scheduledSession.start_time, scheduledSession.end_time)}</Text>
               {scheduledSession.location ? <Text style={styles.meta}>{scheduledSession.location}</Text> : null}
-              <Text style={styles.status}>{scheduledSession.status}</Text>
+              <StatusBadge status={scheduledSession.status} />
             </View>
           ))}
         </View>
@@ -45,7 +55,15 @@ export default function ClientCalendarScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("scheduledWorkouts")}</Text>
           {assignedWorkoutsQuery.isLoading ? <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} /> : null}
-          {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.data?.length ? (
+          {assignedWorkoutsQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={assignedWorkoutsQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => assignedWorkoutsQuery.refetch()}
+            />
+          ) : null}
+          {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.isError && !assignedWorkoutsQuery.data?.length ? (
             <EmptyState title={t("noAssignedWorkouts")} body={t("placeholder.emptyBody")} />
           ) : null}
           {assignedWorkoutsQuery.data?.map((workout) => (
@@ -55,7 +73,7 @@ export default function ClientCalendarScreen() {
                 <Text style={styles.meta}>{workout.workout_templates.description}</Text>
               ) : null}
               <Text style={styles.meta}>{workout.scheduled_date}</Text>
-              <Text style={styles.status}>{workout.status}</Text>
+              <StatusBadge status={workout.status} />
             </View>
           ))}
         </View>
@@ -104,10 +122,4 @@ const styles = StyleSheet.create({
     fontSize: typography.size.sm,
     lineHeight: typography.lineHeight.sm
   },
-  status: {
-    color: colors.primary,
-    fontSize: typography.size.sm,
-    lineHeight: typography.lineHeight.sm,
-    fontWeight: typography.weight.semibold
-  }
 });

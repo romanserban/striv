@@ -255,6 +255,57 @@ Status:
 
 ---
 
+## push_tokens
+
+Stores Expo push tokens for signed-in users.
+
+Fields:
+- id uuid primary key
+- user_id uuid references profiles(id)
+- token text not null
+- platform text check platform in ('ios', 'android', 'web', 'unknown')
+- device_name text nullable
+- project_id text nullable
+- last_seen_at timestamp default now()
+- created_at timestamp default now()
+- updated_at timestamp default now()
+
+Rule:
+- Users can manage only their own push tokens.
+
+---
+
+## notification_events
+
+Stores notification events for future server-side delivery.
+
+Fields:
+- id uuid primary key
+- recipient_id uuid references profiles(id)
+- actor_id uuid references profiles(id) nullable
+- type text check type in ('workout_assigned', 'message', 'session_reminder')
+- title text not null
+- body text not null
+- metadata jsonb default '{}'
+- delivery_status text default 'queued'
+- scheduled_for timestamp nullable
+- sent_at timestamp nullable
+- error_message text nullable
+- created_at timestamp default now()
+- updated_at timestamp default now()
+
+Status:
+- queued
+- sent
+- failed
+- skipped
+
+Rule:
+- Users can read their own notification events.
+- Event creation/delivery should be handled by a trusted server process.
+
+---
+
 # Storage
 
 ## Bucket
@@ -303,3 +354,8 @@ Recommended indexes:
 - scheduled_sessions.client_id
 - scheduled_sessions.coach_id
 - scheduled_sessions.start_time
+- push_tokens.user_id
+- notification_events.recipient_id
+- notification_events.type
+- notification_events.delivery_status
+- notification_events.scheduled_for

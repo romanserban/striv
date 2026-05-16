@@ -8,4 +8,8 @@ describe("workout assignment schema", () => {
   it("rejects a non-ISO date", () => {
     expect(workoutAssignmentSchema.safeParse({ scheduledDate: "15/05/2026" }).success).toBe(false);
   });
+
+  it("rejects an impossible ISO date", () => {
+    expect(workoutAssignmentSchema.safeParse({ scheduledDate: "2026-02-31" }).success).toBe(false);
+  });
 });

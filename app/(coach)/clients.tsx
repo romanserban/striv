@@ -8,9 +8,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { Input } from "@/components/ui/Input";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { PlaceholderScreen } from "@/components/ui/PlaceholderScreen";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { workoutAssignmentSchema, type WorkoutAssignmentFormValues } from "@/features/workouts/assignmentSchemas";
 import { assignmentsService } from "@/services/assignments";
 import { profilesService } from "@/services/profiles";
@@ -88,7 +90,17 @@ export default function CoachClientsScreen() {
           <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} />
         </Card>
       ) : null}
-      {!clientsQuery.isLoading && !clientsQuery.data?.length ? (
+      {clientsQuery.isError ? (
+        <Card>
+          <ErrorState
+            title={t("errors.title")}
+            message={clientsQuery.error.message}
+            retryLabel={t("retry")}
+            onRetry={() => clientsQuery.refetch()}
+          />
+        </Card>
+      ) : null}
+      {!clientsQuery.isLoading && !clientsQuery.isError && !clientsQuery.data?.length ? (
         <Card>
           <EmptyState title={t("noClients")} body={t("placeholder.emptyBody")} />
         </Card>
@@ -118,6 +130,17 @@ export default function CoachClientsScreen() {
           <Text style={styles.meta}>
             {t("selectedWorkout")}: {selectedWorkoutTemplate?.name ?? t("selectWorkout")}
           </Text>
+          {workoutTemplatesQuery.isLoading ? (
+            <LoadingSkeleton count={2} accessibilityLabel={t("placeholder.loading")} />
+          ) : null}
+          {workoutTemplatesQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={workoutTemplatesQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => workoutTemplatesQuery.refetch()}
+            />
+          ) : null}
           <View style={styles.list}>
             {workoutTemplatesQuery.data?.map((template) => (
               <Button
@@ -145,6 +168,7 @@ export default function CoachClientsScreen() {
           {assignWorkoutMutation.isSuccess ? <Text style={styles.success}>{t("workoutAssigned")}</Text> : null}
           <Button
             label={t("assignWorkout")}
+            disabled={!selectedClientId || !selectedWorkoutTemplateId || !coachProfileQuery.data?.id}
             loading={assignWorkoutMutation.isPending}
             onPress={handleSubmit(onAssignWorkout)}
           />
@@ -153,7 +177,16 @@ export default function CoachClientsScreen() {
       <Card>
         <View style={styles.client}>
           <Text style={styles.name}>{t("assignedWorkouts")}</Text>
-          {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.data?.length ? (
+          {assignedWorkoutsQuery.isLoading ? <LoadingSkeleton accessibilityLabel={t("placeholder.loading")} /> : null}
+          {assignedWorkoutsQuery.isError ? (
+            <ErrorState
+              title={t("errors.title")}
+              message={assignedWorkoutsQuery.error.message}
+              retryLabel={t("retry")}
+              onRetry={() => assignedWorkoutsQuery.refetch()}
+            />
+          ) : null}
+          {!assignedWorkoutsQuery.isLoading && !assignedWorkoutsQuery.isError && !assignedWorkoutsQuery.data?.length ? (
             <Text style={styles.meta}>{t("noAssignedWorkouts")}</Text>
           ) : null}
           {assignedWorkoutsQuery.data?.map((workout) => (
@@ -162,7 +195,7 @@ export default function CoachClientsScreen() {
               <Text style={styles.meta}>
                 {workout.client_profiles?.profiles?.full_name ?? t("client")} - {workout.scheduled_date}
               </Text>
-              <Text style={styles.status}>{workout.status}</Text>
+              <StatusBadge status={workout.status} />
             </View>
           ))}
         </View>
@@ -203,10 +236,4 @@ const styles = StyleSheet.create({
     fontSize: typography.size.sm,
     lineHeight: typography.lineHeight.sm
   },
-  status: {
-    color: colors.primary,
-    fontSize: typography.size.sm,
-    lineHeight: typography.lineHeight.sm,
-    fontWeight: typography.weight.semibold
-  }
 });
